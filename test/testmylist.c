@@ -53,6 +53,11 @@ int main()
 	my_char('\n');
 	add_node(NULL, &head);
 	if(strcmp((*head).elem, n2->elem) == 0)
+		my_str("add NULL ok\n");
+	else
+		my_str("add NULL FAIL!\n");
+	add_node(new_node(NULL, NULL), &head);
+	if(strcmp((*head).elem, n2->elem) == 0)
 		my_str("add NULL node ok\n");
 	else
 		my_str("add NULL node FAIL!\n");
@@ -72,7 +77,10 @@ int main()
 	add_node(new_node(i3, NULL), &head);
 	traverse_int(head);/*prints 1 2 3 */
 	my_char('\n');
-	traverse_int(NULL);/*if this doesn't segfault then we're good!*/
+	head->next->elem = NULL;
+	traverse_int(head);/*prints 1 NULL 3*/
+	my_char('\n');
+	traverse_int(NULL);/*prints The list is empty!*/
 
 	empty_list(&head);
 	c = 'c';
@@ -86,7 +94,10 @@ int main()
 	add_node(new_node(c3, NULL), &head);
 	traverse_char(head);/*prints a b c */
 	my_char('\n');
-	traverse_char(NULL);/*if this doesn't segfault then we're good!*/
+	head->elem = NULL;
+	traverse_char(head);/*prints NULL b c*/
+	my_char('\n');
+	traverse_char(NULL);/*prints The list is empty!*/
 
 	empty_list(&head);
 	add_node(new_node("third", NULL), &head);
@@ -94,7 +105,10 @@ int main()
 	add_node(new_node("first", NULL), &head);
 	traverse_string(head);/*prints first second third */
 	my_char('\n');
-	traverse_string(NULL);/*if this doesn't segfault then we're good!*/
+	head->next->next->elem = NULL;
+	traverse_string(head);/*prints first second NULL*/
+	my_char('\n');
+	traverse_string(NULL);/*prints The list is empty!*/
 	empty_list(&head);
 	my_str("---------------------------------------------------------------------\n");
 
@@ -108,7 +122,7 @@ int main()
 	if(strcmp(head->elem, "c") == 0)
 		my_str("add NULL elem ok\n");
 	else
-		my_str("add NULL elem FAIL!\n");
+		my_str("add NULL elem FAIL!\n");	
 	my_str("---------------------------------------------------------------------\n");
 	
 	/*append*/
@@ -132,6 +146,9 @@ int main()
 	traverse_string(head);/*prints d c b a 0 z y*/
 	my_char('\n');
 	add_node_at(NULL, &head, 2);
+	traverse_string(head);/*prints d c b a 0 z y*/
+	my_char('\n');
+	add_node_at(new_node(NULL, NULL), &head, 1);
 	traverse_string(head);/*prints d c b a 0 z y*/
 	my_char('\n');
 	add_node_at(new_node("something", NULL), NULL, 7);/*if this line doesn't segfault then we're good!*/
@@ -212,13 +229,15 @@ int main()
 	my_str("---------------------------------------------------------------------\n");
 
 	/*empty_list*/
-	my_int(count_nodes(head));/*prints 3*/
+	my_int(count_nodes(head));/*prints 2*/
 	my_char('\n');
 	empty_list(&head);
 	my_int(count_nodes(head));/*prints 0*/
 	my_char('\n');
 	empty_list(NULL);/*if this doesn't segfault then we're good!*/
 	my_str("---------------------------------------------------------------------\n");
+	
+	free(head);
 
 	return 0;
 }
