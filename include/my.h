@@ -16,7 +16,6 @@
 /* This is the header for the libmy project,
 *it is a class full of methods for printing things on the screen
 */
-
 void my_char(char);
 void my_str(char*); 
 void my_int(int);
@@ -28,7 +27,9 @@ int my_revstr(char*);
 int my_strpos(char*, char);
 int my_strrpos(char*, char);
 
-/*part 2 methods*/
+/*part 2 methods
+these are string manipulation methods
+*/
 char* my_strdup(char*);
 int my_strcmp(char*, char*);
 int my_strncmp(char*, char*, unsigned int);
@@ -40,5 +41,9 @@ char* my_strnconcat(char*, char*, unsigned int);
 char* my_strfind(char*, char);
 char* my_strrfind(char*, char);
 void* xmalloc(unsigned int);
+
+/*my_vect2str for mypipes project
+*/
+char* my_vect2str(char**);
 
 #endif
