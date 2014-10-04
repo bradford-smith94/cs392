@@ -29,4 +29,4 @@ clean:
 fclean: clean
 	-$(RM) $(LIBPATH)/$(NAME)
 
-re: fclean all clean
+re: fclean all

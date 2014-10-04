@@ -12,6 +12,6 @@
 /* This is the header for the mypipes project,
 * it is a program that utilizes pipes to communicate between forked processes
 */
-int main(char*, char**);
+int main(int, char**);
 
 #endif
