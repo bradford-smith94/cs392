@@ -8,6 +8,6 @@ Projects:
 libmy
   - library for printing and string manipulation methods
 libmylist
-  - library for a linked list using void*'s
+  - library for a linked list using void pointers
 mypipes
   - program that uses pipes to send data between separate processes
