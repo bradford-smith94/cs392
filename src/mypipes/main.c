@@ -30,8 +30,11 @@ int main(int argc, char **argv)
 		/*this is GRANDPA*/
 		close(pipe1[0]);
 		message = my_vect2str(&argv[1]);
-		//write(pipe1[1]...
-		wait;
+		my_str("This is Grandpa sending \"");
+		my_str(message);
+		my_str("\"\n");
+		write(pipe1[1], message, 256);
+		wait();
 	}
 	else
 	{
@@ -47,15 +50,22 @@ int main(int argc, char **argv)
 		{
 			/*this is still DAD*/
 			close(pipe2[0]);
-			//n = read(pipe1[0]...
-			//write(pipe2[1]...
-			wait;
+			n = read(pipe1[0], message, 256);
+			my_str("This is Dad recieving and sending \"");
+			my_str(message);
+			my_str("\"\n");
+
+			write(pipe2[1], message, 256);
+			wait();
 		}
 		else
 		{
 			/*this is CHILD*/
 			close(pipe2[1]);
-			//n = read(pipe2[0]...
+			n = read(pipe2[0], message, 256);
+			my_str("This is Child recieving \"");
+			my_str(message);
+			my_str("\"\n");
 		}
 	}
 	return 0;
