@@ -9,7 +9,7 @@ OBJ=$(SRC:.c=.o)
 RM=rm -f
 INCLPATH=../../include
 LIBPATH=../../lib
-CFLAGS+= -I$(INCLPATH)
+CFLAGS+= -I$(INCLPATH) -pedantic-errors
 
 all: $(OBJ)
 	cc -I$(INCLPATH) -L$(LIBPATH) $(OBJ) -lmy -o $(NAME)

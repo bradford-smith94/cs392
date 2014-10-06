@@ -17,10 +17,8 @@ int main(int argc, char **argv)
 	int pipe2[2];
 	int pid;
 	int n;
-	int bufSize;
 	char *message;
 
-	bufSize = 256;
 	if(pipe(pipe1))
 		my_err("ERROR failed to create pipe1!");
 	if((pid = fork()) < 0)
@@ -31,14 +29,14 @@ int main(int argc, char **argv)
 		if(close(pipe1[0]))
 			my_err("ERROR failed to close pipe1[0] in GRANDPA process!");
 		message = my_vect2str(&argv[1]);
-		my_str("This is Grandpa sending \"");
-		my_str(message);
-		my_str("\"\n");
 		if(my_strlen(message) == -1){
 			free(message);
 			message = my_strdup("NULL");
 		}
-		if((write(pipe1[1], message, bufSize)) < 0)
+		my_str("This is Grandpa sending \"");
+		my_str(message);
+		my_str("\"\n");
+		if((write(pipe1[1], message, 256)) < 0)
 			my_err("ERROR failed to write to pipe1[1] in GRANDPA process!");
 		wait();
 	}
@@ -56,15 +54,13 @@ int main(int argc, char **argv)
 			/*this is DAD after spawning CHILD*/
 			if(close(pipe2[0]))
 				my_err("ERROR failed to close pipe2[0] in DAD process!");
-			do
-				n = read(pipe1[0], message, bufSize);
-			while(n == bufSize);
-		//	if(n < 0);
-		//		my_err("ERROR failed to read from pipe1[0] in DAD process!");
+			n = read(pipe1[0], message, 256);
+			if(n < 0)
+				my_err("ERROR failed to read from pipe1[0] in DAD process!");
 			my_str("This is Dad recieving and sending \"");
 			my_str(message);
 			my_str("\"\n");
-			if((write(pipe2[1], message, bufSize)) < 0)
+			if((write(pipe2[1], message, 256)) < 0)
 				my_err("ERROR failed to write to pipe2[1] in DAD process!");
 			wait();
 		}
@@ -73,11 +69,9 @@ int main(int argc, char **argv)
 			/*this is CHILD*/
 			if(close(pipe2[1]))
 				my_err("ERROR failed to close pipe2[1] in CHILD process!");
-			do
-				n = read(pipe2[0], message, bufSize);
-			while(n == bufSize);
-		//	if(n < 0)
-		//		my_err("ERROR failed to read from pipe2[0] in CHILD process!");
+			n = read(pipe2[0], message, 256);
+			if(n < 0)
+				my_err("ERROR failed reading from pipe2[0] in CHILD process!");
 			my_str("This is Child recieving \"");
 			my_str(message);
 			my_str("\"\n");
