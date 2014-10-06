@@ -13,5 +13,6 @@
 * it is a program that utilizes pipes to communicate between forked processes
 */
 int main(int, char**);
+void my_err(char*);
 
 #endif

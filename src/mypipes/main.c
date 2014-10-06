@@ -17,52 +17,67 @@ int main(int argc, char **argv)
 	int pipe2[2];
 	int pid;
 	int n;
+	int bufSize;
 	char *message;
 
-	pipe(pipe1);
+	bufSize = 256;
+	if(pipe(pipe1))
+		my_err("ERROR failed to create pipe1!");
 	if((pid = fork()) < 0)
-	{
-		my_str("ERROR spwaning DAD process!");
-		exit(-1);
-	}
+		my_err("ERROR spawning DAD process!");
 	else if(pid > 0)
 	{
-		/*this is GRANDPA*/
-		close(pipe1[0]);
+		/*this is GRANDPA after spawning DAD*/
+		if(close(pipe1[0]))
+			my_err("ERROR failed to close pipe1[0] in GRANDPA process!");
 		message = my_vect2str(&argv[1]);
 		my_str("This is Grandpa sending \"");
 		my_str(message);
 		my_str("\"\n");
-		write(pipe1[1], message, 256);
+		if(my_strlen(message) == -1){
+			free(message);
+			message = my_strdup("NULL");
+		}
+		if((write(pipe1[1], message, bufSize)) < 0)
+			my_err("ERROR failed to write to pipe1[1] in GRANDPA process!");
 		wait();
 	}
 	else
 	{
 		/*this is DAD*/
-		close(pipe1[1]);
-		pipe(pipe2);
+		if(close(pipe1[1]))
+			my_err("ERROR failed to close pipe1[1] in DAD process!");
+		if(pipe(pipe2))
+			my_err("ERROR failed to create pipe2!");
 		if((pid = fork()) < 0)
-		{
-			my_str("ERROR spawning CHILD process!");
-			exit(-1);
-		}
+			my_err("ERROR spawning CHILD process!");
 		else if(pid > 0)
 		{
-			/*this is still DAD*/
-			close(pipe2[0]);
-			n = read(pipe1[0], message, 256);
+			/*this is DAD after spawning CHILD*/
+			if(close(pipe2[0]))
+				my_err("ERROR failed to close pipe2[0] in DAD process!");
+			do
+				n = read(pipe1[0], message, bufSize);
+			while(n == bufSize);
+		//	if(n < 0);
+		//		my_err("ERROR failed to read from pipe1[0] in DAD process!");
 			my_str("This is Dad recieving and sending \"");
 			my_str(message);
 			my_str("\"\n");
-
-			write(pipe2[1], message, 256);
+			if((write(pipe2[1], message, bufSize)) < 0)
+				my_err("ERROR failed to write to pipe2[1] in DAD process!");
 			wait();
 		}
 		else
 		{
 			/*this is CHILD*/
-			close(pipe2[1]);
-			n = read(pipe2[0], message, 256);
+			if(close(pipe2[1]))
+				my_err("ERROR failed to close pipe2[1] in CHILD process!");
+			do
+				n = read(pipe2[0], message, bufSize);
+			while(n == bufSize);
+		//	if(n < 0)
+		//		my_err("ERROR failed to read from pipe2[0] in CHILD process!");
 			my_str("This is Child recieving \"");
 			my_str(message);
 			my_str("\"\n");
