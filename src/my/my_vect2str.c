@@ -1,5 +1,6 @@
 /*Bradford Smith (bsmith8)
 *my_vect2str.c mypipes project
+*10/3/2014
 *"I pledge my honor that I have abided by the Stevens Honor System."
 */
 
