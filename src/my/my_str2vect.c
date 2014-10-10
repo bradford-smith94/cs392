@@ -13,4 +13,46 @@
 char** my_str2vect(char *s)
 {
 	char **vect;
+	int i;
+	int w;/*word count*/
+	int c;/*count*/
+	char last;
+
+	if(s == NULL)
+		return NULL;
+	w = 0;
+	last = '\0';
+	for(i = 0; s[i] != '\0'; i++)
+	{
+		if(s[i] != ' ' && s[i] != '\t')
+			if(last == ' ' || last == '\t' || last == '\0')
+				w++;
+		last = s[i];
+	}/*found number of words*/
+	vect = (char**)xmalloc(w*sizeof(char*));
+	c = 0;
+	w = 0;
+	last = '\0';
+	for(i = 0; s[i] != '\0'; i++)
+	{
+		if(s[i] != ' ' && s[i] != '\t')
+		{
+			if(last == ' ' || last == '\t' || last == '\0')
+				c++;
+		}
+		else if(c != 0)
+		{
+			vect[w] = (char*)xmalloc(c*sizeof(char)+1);
+			w++;
+			c = 0;
+		}
+		last = s[i];
+	}/*found size of each word*/
+	w = 0;
+	last = '\0';
+	for(i = 0; s[i] != '\0'; i++)
+	{
+		if(s[i] != ' ' && s[i] != '\t')
+			
+	}
 }
