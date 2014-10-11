@@ -4,12 +4,12 @@
 #"I pledge my honor that I have abided by the Stevens Honor System."
 
 NAME=minishell
-SRC= 
+SRC= main.c
 OBJ=$(SRC:.c=.o)
 RM=rm -f
 INCLPATH=../../include
 LIBPATH=../../lib
-CFLAGS+= -I$(INCLPATH) -pedantic-errors
+CFLAGS+= -I$(INCLPATH) -Wall -pedantic-errors
 
 all: $(OBJ)
 	cc -I$(INCLPATH) -L$(LIBPATH) $(OBJ) -lmy -o $(NAME)
