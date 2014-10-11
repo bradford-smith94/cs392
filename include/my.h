@@ -43,9 +43,10 @@ char* my_strrfind(char*, char);
 void* xmalloc(unsigned int);
 
 /*my_vect2str for mypipes project
-*my_str2vect for myminishell project
+*my_str2vect and my_freevect for myminishell project
 */
 char* my_vect2str(char**);
 char** my_str2vect(char*);
+void my_freevect(char**);
 
 #endif

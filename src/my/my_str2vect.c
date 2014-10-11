@@ -29,7 +29,14 @@ char** my_str2vect(char *s)
 				w++;
 		last = s[i];
 	}/*found number of words*/
-	vect = (char**)xmalloc(w*sizeof(char*));
+	if(w > 0)
+		vect = (char**)xmalloc(w*sizeof(char*));
+	else
+	{
+		vect = (char**)xmalloc(sizeof(char*));
+		*vect = NULL;
+		return vect;
+	}	
 	c = 0;
 	w = 0;
 	last = '\0';
