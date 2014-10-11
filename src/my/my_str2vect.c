@@ -48,11 +48,21 @@ char** my_str2vect(char *s)
 		}
 		last = s[i];
 	}/*found size of each word*/
+	c = 0;
 	w = 0;
 	last = '\0';
 	for(i = 0; s[i] != '\0'; i++)
 	{
 		if(s[i] != ' ' && s[i] != '\t')
-			
-	}
+		{
+			vect[w][c] = s[i];
+		}
+		else if((s[i] == ' ' || s[i] == '\t') && (last != ' ' || last != '\t' || last != '\0'))
+		{
+			vect[w++][c] = '\0';
+			c = 0;
+		}
+		last = s[i];
+	}/*copied words to vect*/
+	return vect;
 }
