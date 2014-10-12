@@ -21,28 +21,28 @@ int main(int argc, char **argv)
 	{
 		my_str("minishell prompt> ");
 		n = read(0, s, 256);
-		s [n - 1] = '\0';
-		if(n > 0)
+		s[n - 1] = '\0';
+		if(n > 1)/*1 character is just a \0 (read in \n user just hit enter)*/
 		{
 			v = my_str2vect(s);
 			if(my_strcmp(v[0], "cd") == 0)
 			{
-				/*cd somewhere*/
-				my_str("cd somewhere\n");
+				if(v[1] != NULL)
+					my_chdir(v[1]);
+				else
+					my_chdir("~");
 			}
 			else if(my_strcmp(v[0], "exit") == 0)
-			{
-				/*exit*/
 				break;
-			}
 			else
 			{
+				/*need to fork here*/
 				my_str(v[0]);
-				my_char('\n');
+				my_str("<\\n\n");
 			}
 		}
 		else if(n < 0)
-			exit(-1);			
+			my_err("minishell: ERROR reading command\n");
 	}
 	my_str("Thank you for using myminishell, live long and prosper.\n");
 	return 0;

@@ -4,7 +4,7 @@
 #"I pledge my honor that I have abided by the Stevens Honor System."
 
 NAME=minishell
-SRC= main.c
+SRC= main.c my_err.c my_chdir.c
 OBJ=$(SRC:.c=.o)
 RM=rm -f
 INCLPATH=../../include

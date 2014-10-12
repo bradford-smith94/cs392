@@ -15,5 +15,7 @@
 *	it will also be able to run any installed programs (like a normal shell)
 */
 int main(int, char**);
+void my_err(char*);
+void my_chdir(char*);
 
 #endif
