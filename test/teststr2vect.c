@@ -15,8 +15,11 @@ int main(int argc, char **argv)
 	int i;
 	char *s;
 	char **v;
-
-	s = my_vect2str(&argv[1]);
+	
+	if(argc > 1)
+		s = my_vect2str(&argv[1]);
+	else
+		s = "\tstuff that  has  a tab    and \t weird spacing";
 	v = my_str2vect(s);
 	for(i = 0; i < argc - 1; i++)
 	{

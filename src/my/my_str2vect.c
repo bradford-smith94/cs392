@@ -76,7 +76,7 @@ char** my_str2vect(char *s)
 			/*my_str("adding a letter\n");*/
 			vect[w][c++] = s[i];
 		}
-		else if(last != ' ' || last != '\t' || last != '\0')
+		else if(last != ' ' && last != '\t' && last != '\0')
 		{
 			/*my_str("adding a \\0\n");*/
 			vect[w++][c] = '\0';
