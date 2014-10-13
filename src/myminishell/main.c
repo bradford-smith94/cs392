@@ -22,17 +22,17 @@ int main(int argc, char **argv)
 	{
 		my_str("minishell> ");
 		n = read(0, s, 256);
+		#ifdef DEBUG
+			my_str("n= ");
+			my_int(n);
+			my_char('\n');
+		#endif
 		s[n - 1] = '\0';
 		if(n > 1)/*1 character is just a \0 (read in \n user just hit enter)*/
 		{
 			v = my_str2vect(s);
 			if(my_strcmp(v[0], "cd") == 0)
-			{
-				if(v[1] != NULL)
-					my_chdir(v[1]);
-				else
-					my_chdir("~");
-			}
+				my_chdir(v[1]);
 			else if(my_strcmp(v[0], "exit") == 0)
 				break;
 			else if(v[0] != NULL)/*if not just whitespace, we're going to need to fork*/
@@ -49,7 +49,7 @@ int main(int argc, char **argv)
 				else
 				{
 					my_execvp(v[0], v);
-					exit(0);
+					exit(0);/*just in case we didn't kill the process in the method*/
 				}
 			}
 			my_freevect(v);
