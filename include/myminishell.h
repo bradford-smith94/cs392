@@ -8,6 +8,7 @@
 #define _MYMINISHELL_H_
 
 #include "my.h"
+#include "sys/wait.h"/*for the definition of wait()*/
 
 /*This is the header for the myminishell project,
 *	it is a basic shell-like program
@@ -17,5 +18,6 @@
 int main(int, char**);
 void my_err(char*);
 void my_chdir(char*);
+void my_execvp(char*, char**);
 
 #endif

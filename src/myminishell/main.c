@@ -13,13 +13,14 @@
 int main(int argc, char **argv)
 {
 	int n;
+	int pid;
 	char *s;
 	char **v;
 
 	s = (char*)xmalloc(256*sizeof(char));
 	while(1)
 	{
-		my_str("minishell prompt> ");
+		my_str("minishell> ");
 		n = read(0, s, 256);
 		s[n - 1] = '\0';
 		if(n > 1)/*1 character is just a \0 (read in \n user just hit enter)*/
@@ -34,16 +35,29 @@ int main(int argc, char **argv)
 			}
 			else if(my_strcmp(v[0], "exit") == 0)
 				break;
-			else
+			else if(v[0] != NULL)/*if not just whitespace, we're going to need to fork*/
 			{
-				/*need to fork here*/
-				my_str(v[0]);
-				my_str("<\\n\n");
+				#ifdef DEBUG
+					my_str(v[0]);
+					my_str("<\\n\n");
+					my_str("going to fork\n");
+				#endif
+				if((pid = fork()) < 0)
+					my_err("minishell: ERROR forking process!\n");
+				else if(pid > 0)
+					wait(NULL);
+				else
+				{
+					my_execvp(v[0], v);
+					exit(0);
+				}
 			}
+			my_freevect(v);
 		}
 		else if(n < 0)
-			my_err("minishell: ERROR reading command\n");
+			my_str("minishell: ERROR reading command\n");
 	}
+	free(s);
 	my_str("Thank you for using myminishell, live long and prosper.\n");
 	return 0;
 }
