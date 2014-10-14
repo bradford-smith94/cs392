@@ -53,8 +53,7 @@ int main(int argc, char **argv)
 					#ifdef DEBUG
 						my_str("exiting forked process\n");
 					#endif
-					exit(0);
-					return 0;
+					exit(0);/*for processes that end in error*/
 				}
 			}
 			#ifdef DEBUG
