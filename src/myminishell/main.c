@@ -38,8 +38,9 @@ int main(int argc, char **argv)
 			else if(v[0] != NULL)/*if not just whitespace, we're going to need to fork*/
 			{
 				#ifdef DEBUG
+					my_str("command:>");
 					my_str(v[0]);
-					my_str("<\\n\n");
+					my_str("<\n");
 					my_str("going to fork\n");
 				#endif
 				if((pid = fork()) < 0)
@@ -49,9 +50,16 @@ int main(int argc, char **argv)
 				else
 				{
 					my_execvp(v[0], v);
-					exit(0);/*just in case we didn't kill the process in the method*/
+					#ifdef DEBUG
+						my_str("exiting forked process\n");
+					#endif
+					exit(0);
+					return 0;
 				}
 			}
+			#ifdef DEBUG
+				my_str("freeing vector\n");
+			#endif
 			my_freevect(v);
 		}
 		else if(n < 0)

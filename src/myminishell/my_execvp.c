@@ -54,5 +54,4 @@ void my_execvp(char *prog, char **argv)
 		else
 			my_str(": unspecified error\n");
 	}
-	exit(0);
 }

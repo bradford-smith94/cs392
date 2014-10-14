@@ -16,8 +16,11 @@ void my_chdir(char *path)
 {
 	int n;
 	
-	if(path != NULL && (my_strcmp(path, ".") != 0))
+	if(path != NULL) 
 	{
+		#ifdef DEBUG
+			my_str("cding somewhere else\n");
+		#endif
 		n = chdir(path);
 		if(n < 0)
 		{

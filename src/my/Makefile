@@ -14,10 +14,15 @@ RM=rm -f
 INCLPATH=../../include
 LIBPATH=../../lib
 CFLAGS+= -I$(INCLPATH)
+DEBUG= -g -DDEBUG 
 
 all: $(OBJ)
 	ar -rc $(LIBPATH)/$(NAME) $(OBJ)
 	ranlib $(LIBPATH)/$(NAME)
+
+debug: fclean
+debug: CFLAGS+= $(DEBUG)
+debug: all
 
 clean:
 	-$(RM) *.o

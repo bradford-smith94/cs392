@@ -15,6 +15,7 @@ DEBUG= -g -DDEBUG
 all: $(OBJ)
 	cc -I$(INCLPATH) -L$(LIBPATH) $(OBJ) -lmy -o $(NAME)
 
+debug: fclean
 debug: CFLAGS+= $(DEBUG)
 debug: all
 

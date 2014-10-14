@@ -15,5 +15,6 @@ void my_freevect(char **vect)
 
 	for(i = 0; vect[i] != NULL; i++)
 		free(vect[i]);
+	free(vect[i]);/*free the last NULL*/
 	free(vect);
 }
