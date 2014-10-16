@@ -49,4 +49,8 @@ char* my_vect2str(char**);
 char** my_str2vect(char*);
 void my_freevect(char**);
 
+/*my_atoi for mysignals project
+*/
+int my_atoi(char*);
+
 #endif
