@@ -12,18 +12,23 @@
 int my_atoi(char *s)
 {
 	int r;/*return value*/
-	int n;/*negative flag*/
+	char n;/*negative flag*/
 
 	r = 0;
-	c = 0;
+	n = 0;
 	if(s != NULL)
 	{
 		for( ; *s == ' ' || *s == '\t'; s++)
 			;/*skipping over leading whitespaces*/
 		for( ; *s == '+' || *s == '-'; s++)
 			(*s == '-') ? n ^= 1 : n;/*n is set to 1 for odd numbers of -'s*/
-		for( ; *s != '\0'; s++)
-			;/*read number*/
+		for( ; *s >= '0' && *s <= '9'; s++)
+		{
+			r *= 10;
+			r += *s - '0';
+		}/*read number*/
+		if(n)
+			r *= -1;
 	}
 	return r;
 }
