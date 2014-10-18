@@ -8,6 +8,8 @@
 #define _MYSIGNALS_H_
 
 #include "my.h"
+#include <signal.h>/*for handling signals*/
+#include <sys/types.h>/*for pid_t*/
 
 #ifdef SERVER
 	struct s_env

@@ -37,7 +37,7 @@ int main(int argc, char **argv)
 	else
 	{
 		my_str("usage: ./client serverpid message\n");
-		return -1;
+		exit(-1);
 	}
 	return 0;
 }
