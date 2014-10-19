@@ -20,9 +20,16 @@ int main(int argc, char **argv)
 		serverpid = my_atoi(argv[1]);
 		if(serverpid == 0)
 		{
-			my_str("error parsing serverpid\n");
+			my_str("ERROR: invalid serverpid: unrecognized number\n");
 			return -1;
 		}
+		#ifdef DEBUG
+			my_str("Server at: ");
+			my_int(serverpid);
+			my_str("\nMy pid: ");
+			my_int(getpid());
+			my_char('\n');
+		#endif
 		signal(SIGUSR1, get_ack);
 		signal(SIGALRM, sigalarm);
 		send_pid(getpid(), serverpid);
@@ -36,7 +43,7 @@ int main(int argc, char **argv)
 	}
 	else
 	{
-		my_str("usage: ./client serverpid message\n");
+		my_str("usage: ./client serverpid message [more message]...\n");
 		exit(-1);
 	}
 	return 0;

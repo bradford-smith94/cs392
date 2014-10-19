@@ -13,6 +13,8 @@ RM=rm -f
 INCLPATH=../../include
 LIBPATH=../../lib
 CFLAGS+= -I$(INCLPATH) -pedantic-errors -Wall
+LDFLAGS+= -I$(INCLPATH) -L$(LIBPATH)
+LDLIBS+= -lmy
 DEBUGFLGS= -g -DDEBUG
 SERVERFLG= -DSERVER
 
@@ -20,10 +22,10 @@ all: server client
 
 server: CFLAGS+= $(SERVERFLG)
 server: $(SERVEROBJ)
-	cc -I$(INCLPATH) -L$(LIBPATH) $(SERVEROBJ) -lmy -o $(SERVER)
+	cc $(LDFLAGS) $(SERVEROBJ) $(LDLIBS) -o $(SERVER)
 
 client: $(CLIENTOBJ)
-	cc -I$(INCLPATH) -L$(LIBPATH) $(CLIENTOBJ) -lmy -o $(CLIENT)
+	cc $(LDFLAGS) $(CLIENTOBJ) $(LDLIBS) -o $(CLIENT)
 
 debug: fclean
 debug: CFLAGS+= $(DEBUGFLGS)

@@ -16,12 +16,24 @@ void get_clientpid(int sig)
 
 	p <<= 1;
 	if(sig == SIGUSR1)
+	{
 		p |= 1;
+	#ifdef DEBUG
+		my_int(1);
+	}
+	else
+	{
+		my_int(0);
+	#endif
+	}
 	count++;
 	if(count == (8*sizeof(pid_t)))
 	{
 		gl_env.clientpid = p;
 		p = 0;
 		count = 0;
+		#ifdef DEBUG
+			my_char('\n');
+		#endif
 	}
 }

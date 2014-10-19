@@ -17,9 +17,13 @@ int main()
 	my_str("Server running on pid: ");
 	my_int(getpid());
 	my_char('\n');
+	my_str("To shut it down use: ^C\n");
+	my_str("\n=========================\n\n");
 	signal(SIGINT, goodbye);
 	while(1)
 	{
+		if(gl_env.done)
+			gl_env.done = 0;
 		signal(SIGUSR1, get_clientpid);
 		signal(SIGUSR2, get_clientpid);
 		for(i = 0; i < (8*sizeof(int)); i++)
@@ -29,7 +33,7 @@ int main()
 		kill(gl_env.clientpid, SIGUSR1);
 		while(!gl_env.done)
 			pause();
-		my_str("=========================\n\n");
+		my_str("\n=========================\n\n");
 	}
 	return 0;
 }
