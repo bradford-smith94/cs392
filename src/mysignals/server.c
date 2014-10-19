@@ -14,11 +14,7 @@ int main()
 {
 	int i;
 
-	my_str("Server running on pid: ");
-	my_int(getpid());
-	my_char('\n');
-	my_str("To shut it down use: ^C\n");
-	my_str("\n=========================\n\n");
+	welcome();
 	signal(SIGINT, goodbye);
 	while(1)
 	{

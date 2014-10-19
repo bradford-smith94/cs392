@@ -35,7 +35,7 @@ void send_pid(pid_t mypid, pid_t serverpid)
 			#endif
 		}
 		mypid <<= 1;
-		usleep(3000);/*server can't ack so we sleep for a bit*/
+		usleep(2000);/*server can't ack so we sleep for a bit*/
 	}
 	#ifdef DEBUG
 		my_char('\n');

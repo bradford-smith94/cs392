@@ -5,7 +5,7 @@
 
 SERVER=server
 CLIENT=client
-SERVERSRC= server.c get_char.c get_clientpid.c goodbye.c
+SERVERSRC= server.c get_char.c get_clientpid.c welcome.c goodbye.c
 CLIENTSRC= client.c send_msg.c send_char.c send_pid.c get_ack.c sigalarm.c
 SERVEROBJ=$(SERVERSRC:.c=.o)
 CLIENTOBJ=$(CLIENTSRC:.c=.o)

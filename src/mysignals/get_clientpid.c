@@ -33,7 +33,7 @@ void get_clientpid(int sig)
 		p = 0;
 		count = 0;
 		#ifdef DEBUG
-			my_char('\n');
+			my_str(" :recieved client pid\n");
 		#endif
 	}
 }

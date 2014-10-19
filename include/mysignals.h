@@ -29,6 +29,7 @@
 	int main();
 	void get_char(int);
 	void get_clientpid(int);
+	void welcome();
 	void goodbye();
 #else
 	int main(int, char**);
