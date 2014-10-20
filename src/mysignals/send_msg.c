@@ -8,6 +8,7 @@
 
 /*pre: takes in a char *msg and a pid_t serverpid
 *post: uses the send_char() method to send msg to serverpid
+*	sends a single \0 if msg is NULL
 */
 void send_msg(char *msg, pid_t serverpid)
 {
@@ -15,6 +16,6 @@ void send_msg(char *msg, pid_t serverpid)
 	{
 		for( ; *msg != '\0'; msg++)
 			send_char(*msg, serverpid);
-		send_char(*msg, serverpid);/*send the \0*/
 	}
+	send_char('\0', serverpid);/*send the \0*/
 }
