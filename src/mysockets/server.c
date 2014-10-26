@@ -19,9 +19,26 @@ int main(int argc, char **argv)
 	struct sockaddr_in client_addr;
 	int port;
 
-	/*check argv*/
+	if(argc < 2)
+		my_err("usage: ./server portNumber\n");
+
 	port = my_atoi(argv[1]);
-	/*check port*/
+	if(port < 0)
+		my_err("invalid port number\n");
+
+	if((sockfd = socket(AF_INET, SOCK_STREAM, 0)))
+		my_err("ERROR: cannot create socket\n");
+
+	serv_addr = memset(&serv_addr, 0, sizeof(serv_addr));
 	serv_addr.sin_family = AF_INET;
 	serv_addr.sin_port(htons(port));
+	serv_addr.sin_addr.s_addr = INADDR_ANY
+
+	if(bind(sockfd, (struct sockaddr *)&serv_addr, sizeof(serv_addr)))
+		my_err("ERROR: cannot bind socket\n");
+	
+	while(1)
+	{
+		listen(sockfd, 5);
+	}
 }

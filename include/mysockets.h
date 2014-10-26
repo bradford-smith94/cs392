@@ -13,6 +13,7 @@
 #include <netint/in.h>
 
 #ifdef SERVER
+	#include <string.h>/*for memset*/
 #else
 	#include <netdb.h>
 #endif
@@ -23,6 +24,7 @@
 * connections.
 */
 int main(int char**);
+void my_err(char*);
 #ifdef SERVER
 #else
 #endif
