@@ -18,6 +18,7 @@ int main(int argc, char **argv)
 	struct sockaddr_in serv_addr;
 	struct sockaddr_in client_addr;
 	int port;
+	int pid;
 
 	if(argc < 2)
 		my_err("usage: ./server portNumber\n");
@@ -40,5 +41,15 @@ int main(int argc, char **argv)
 	while(1)
 	{
 		listen(sockfd, 5);
+
+		clientlength = sizeof(client_addr);
+		if((clientfd = accept(sockfd, (struct sockaddr *)&client_addr, &clientlength)) < 0)
+			my_err("ERROR: cannot accept connection\m");
+		if((pid = fork()) < 0)
+			my_err("ERROR: cannot fork process\n");
+		else if(pid == 0)
+		{
+			/*read and write to client here*/
+		}
 	}
 }
