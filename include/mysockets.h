@@ -16,6 +16,7 @@
 	#include <string.h>/*for memset*/
 #else
 	#include <netdb.h>
+	int gl_sockfd = 0;	
 #endif
 
 /* This is the header for the mysockets project,

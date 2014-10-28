@@ -25,7 +25,7 @@ int main(int argc, char **argv)
 
 	port = my_atoi(argv[1]);
 	if(port < 0)
-		my_err("invalid port number\n");
+		my_err("ERROR: invalid port number\n");
 
 	if((sockfd = socket(AF_INET, SOCK_STREAM, 0)))
 		my_err("ERROR: cannot create socket\n");
@@ -42,14 +42,17 @@ int main(int argc, char **argv)
 	{
 		listen(sockfd, 5);
 
-		clientlength = sizeof(client_addr);
-		if((clientfd = accept(sockfd, (struct sockaddr *)&client_addr, &clientlength)) < 0)
+		clientlen = sizeof(client_addr);
+		if((clientfd = accept(sockfd, (struct sockaddr *)&client_addr, &clientlen)) < 0)
 			my_err("ERROR: cannot accept connection\m");
 		if((pid = fork()) < 0)
 			my_err("ERROR: cannot fork process\n");
 		else if(pid == 0)
 		{
-			/*read and write to client here*/
+			while(1)
+			{
+				/*read and write to client here*/
+			}
 		}
 	}
 }
