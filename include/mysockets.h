@@ -10,10 +10,10 @@
 #include "my.h"
 #include <sys/types.h>
 #include <sys/socket.h>
-#include <netint/in.h>
+#include <arpa/inet.h>
+#include <string.h>/*for memset*/
 
 #ifdef SERVER
-	#include <string.h>/*for memset*/
 #else
 	#include <netdb.h>
 	int gl_sockfd = 0;	
@@ -24,7 +24,7 @@
 * to the server using sockets. This application can support multiple client
 * connections.
 */
-int main(int char**);
+int main(int, char**);
 void my_err(char*);
 #ifdef SERVER
 #else

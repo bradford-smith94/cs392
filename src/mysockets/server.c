@@ -14,7 +14,7 @@ int main(int argc, char **argv)
 {
 	int sockfd;
 	int clientfd;
-	int clientlen;
+	socklen_t clientlen;
 	struct sockaddr_in serv_addr;
 	struct sockaddr_in client_addr;
 	int port;
@@ -27,16 +27,22 @@ int main(int argc, char **argv)
 	if(port < 0)
 		my_err("ERROR: invalid port number\n");
 
-	if((sockfd = socket(AF_INET, SOCK_STREAM, 0)))
+	if((sockfd = socket(AF_INET, SOCK_STREAM, 0)) < 0)
 		my_err("ERROR: cannot create socket\n");
 
-	serv_addr = memset(&serv_addr, 0, sizeof(serv_addr));
+	serv_addr = *((struct sockaddr_in *)memset(&serv_addr, 0, sizeof(serv_addr)));
 	serv_addr.sin_family = AF_INET;
-	serv_addr.sin_port(htons(port));
-	serv_addr.sin_addr.s_addr = INADDR_ANY
+	serv_addr.sin_port = htons(port);
+	serv_addr.sin_addr.s_addr = INADDR_ANY;
 
 	if(bind(sockfd, (struct sockaddr *)&serv_addr, sizeof(serv_addr)))
 		my_err("ERROR: cannot bind socket\n");
+	
+	#ifdef DEBUG
+		my_str("***DEBUG***Server started on port ");
+		my_int(port);
+		my_char('\n');
+	#endif
 	
 	while(1)
 	{
@@ -44,7 +50,10 @@ int main(int argc, char **argv)
 
 		clientlen = sizeof(client_addr);
 		if((clientfd = accept(sockfd, (struct sockaddr *)&client_addr, &clientlen)) < 0)
-			my_err("ERROR: cannot accept connection\m");
+			my_err("ERROR: cannot accept connection\n");
+		#ifdef DEBUG
+			my_str("***DEBUG***Client connected: going to fork!\n");
+		#endif
 		if((pid = fork()) < 0)
 			my_err("ERROR: cannot fork process\n");
 		else if(pid == 0)

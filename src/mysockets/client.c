@@ -15,6 +15,9 @@ int main(int argc, char **argv)
 	struct sockaddr_in serv_addr;
 	struct hostent *server;
 	int port;
+	char *name;
+	char *buf;
+	int n;
 
 	if(argc < 3)
 		my_err("usage: ./client serverName portNumber\n");
@@ -23,7 +26,7 @@ int main(int argc, char **argv)
 	if(port < 0)
 		my_err("ERROR: invalid port number\n");
 
-	if((gl_sockfd = socket(AF_INET, SOCK_STREAM, 0)))
+	if((gl_sockfd = socket(AF_INET, SOCK_STREAM, 0)) < 0)
 		my_err("ERROR: cannot create socket\n");
 
 	if(!(server = gethostbyname(argv[1])))
@@ -31,10 +34,24 @@ int main(int argc, char **argv)
 
 	serv_addr.sin_family = AF_INET;
 	serv_addr.sin_port = htons(port);
-	serv_addr.sin_addr.s_addr = memcpy(*(server->h_addr), server->h_length);
+	memcpy(&serv_addr.sin_addr.s_addr, (server->h_addr), server->h_length);
 
 	if(connect(gl_sockfd, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0)
 		my_err("ERROR: cannot connect to socket\n");
+	
+	my_str("Enter username: ");
+	buf = (char*)xmalloc(128*sizeof(char));
+	if((n = read(0, buf, 128)) < 0)
+		my_err("ERROR: cannot read from keyboard\n");
+
+	name = my_strdup(buf);
+	buf[n] = '\0';
+
+	#ifdef DEBUG
+		my_str("***DEBUG***Username: ");
+		my_str(name);
+		my_char('\n');
+	#endif
 	
 	while(1)
 	{
