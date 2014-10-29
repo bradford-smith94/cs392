@@ -5,8 +5,8 @@
 
 SERVER=server
 CLIENT=client
-SERVERSRC= server.c my_err.c
-CLIENTSRC= client.c my_err.c
+SERVERSRC= server.c my_err.c server_exit.c
+CLIENTSRC= client.c my_err.c client_exit.c
 SERVEROBJ=$(SERVERSRC:.c=.o)
 CLIENTOBJ=$(CLIENTSRC:.c=.o)
 RM=rm -f

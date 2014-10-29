@@ -19,6 +19,7 @@ int main(int argc, char **argv)
 	char *buf;
 	int n;
 
+	signal(SIGINT, client_exit);
 	if(argc < 3)
 		my_err("usage: ./client serverName portNumber\n");
 	

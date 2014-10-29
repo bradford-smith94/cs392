@@ -20,6 +20,7 @@ int main(int argc, char **argv)
 	int port;
 	int pid;
 
+	signal(SIGINT, server_exit);
 	if(argc < 2)
 		my_err("usage: ./server portNumber\n");
 

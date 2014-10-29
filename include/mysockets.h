@@ -9,6 +9,7 @@
 
 #include "my.h"
 #include <sys/types.h>
+#include <signal.h>
 #include <sys/socket.h>
 #include <arpa/inet.h>
 #include <string.h>/*for memset*/
@@ -16,7 +17,7 @@
 #ifdef SERVER
 #else
 	#include <netdb.h>
-	int gl_sockfd = 0;	
+	int gl_sockfd;	
 #endif
 
 /* This is the header for the mysockets project,
@@ -27,7 +28,9 @@
 int main(int, char**);
 void my_err(char*);
 #ifdef SERVER
+	void server_exit();
 #else
+	void client_exit();
 #endif
 
 #endif
