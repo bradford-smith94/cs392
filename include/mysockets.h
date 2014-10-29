@@ -12,9 +12,15 @@
 #include <signal.h>
 #include <sys/socket.h>
 #include <arpa/inet.h>
-#include <string.h>/*for memset*/
+#include <string.h>/*for memset and memcpy*/
 
 #ifdef SERVER
+	struct s_env
+	{
+		int serverfd;
+		int clientfd;
+		char childflg;
+	}		gl_env;
 #else
 	#include <netdb.h>
 	int gl_sockfd;	

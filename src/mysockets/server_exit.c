@@ -11,6 +11,19 @@
 */
 void server_exit()
 {
-	my_str("***Shutting down the server...\n");
+	if(gl_env.childflg)
+	{
+		if(close(gl_env.clientfd))
+			my_err("ERROR: cannot safely close client socket\n");
+		#ifdef DEBUG
+			my_str("***DEBUG***Exiting child process\n");
+		#endif
+	}
+	else
+	{
+		if(close(gl_env.serverfd))
+			my_err("ERROR: cannot safely close the socket\n");
+		my_str("***Shutting down the server...\n");
+	}
 	exit(0);
 }

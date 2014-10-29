@@ -12,8 +12,6 @@
 */
 int main(int argc, char **argv)
 {
-	int sockfd;
-	int clientfd;
 	socklen_t clientlen;
 	struct sockaddr_in serv_addr;
 	struct sockaddr_in client_addr;
@@ -28,7 +26,7 @@ int main(int argc, char **argv)
 	if(port < 0)
 		my_err("ERROR: invalid port number\n");
 
-	if((sockfd = socket(AF_INET, SOCK_STREAM, 0)) < 0)
+	if((gl_env.serverfd = socket(AF_INET, SOCK_STREAM, 0)) < 0)
 		my_err("ERROR: cannot create socket\n");
 
 	serv_addr = *((struct sockaddr_in *)memset(&serv_addr, 0, sizeof(serv_addr)));
@@ -36,7 +34,7 @@ int main(int argc, char **argv)
 	serv_addr.sin_port = htons(port);
 	serv_addr.sin_addr.s_addr = INADDR_ANY;
 
-	if(bind(sockfd, (struct sockaddr *)&serv_addr, sizeof(serv_addr)))
+	if(bind(gl_env.serverfd, (struct sockaddr *)&serv_addr, sizeof(serv_addr)))
 		my_err("ERROR: cannot bind socket\n");
 	
 	#ifdef DEBUG
@@ -47,10 +45,10 @@ int main(int argc, char **argv)
 	
 	while(1)
 	{
-		listen(sockfd, 5);
+		listen(gl_env.serverfd, 5);
 
 		clientlen = sizeof(client_addr);
-		if((clientfd = accept(sockfd, (struct sockaddr *)&client_addr, &clientlen)) < 0)
+		if((gl_env.clientfd = accept(gl_env.serverfd, (struct sockaddr *)&client_addr, &clientlen)) < 0)
 			my_err("ERROR: cannot accept connection\n");
 		#ifdef DEBUG
 			my_str("***DEBUG***Client connected: going to fork!\n");
@@ -59,6 +57,7 @@ int main(int argc, char **argv)
 			my_err("ERROR: cannot fork process\n");
 		else if(pid == 0)
 		{
+			gl_env.childflg = 1;
 			while(1)
 			{
 				/*read and write to client here*/
