@@ -10,3 +10,4 @@ Projects:
 - mypipes: program that uses pipes to send data between separate processes
 - myminishell: basic shell-like program
 - mysignals: program that uses signals for basic client/server communication
+- mysockets: program that uses sockets for client/server communication
