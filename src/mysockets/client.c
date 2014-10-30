@@ -64,6 +64,9 @@ int main(int argc, char **argv)
 		if((n = read(0, buf, 128)) < 0)
 			my_err("ERROR: cannot read from keyboard\n");
 
+		if(my_strcmp(buf, "/exit") == 0)
+			client_exit();
+
 		buf[n - 1] = '\0';
 		write(gl_sockfd, buf, 128);
 	}

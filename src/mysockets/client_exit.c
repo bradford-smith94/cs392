@@ -12,6 +12,6 @@
 void client_exit()
 {
 	my_str("***Exiting the client program...\n");
-	my_str("/!\\WARNING/!\\ need to send /exit to the server!\n");
+	write(gl_sockfd, "/exit", 5);
 	exit(0);
 }

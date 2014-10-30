@@ -73,12 +73,22 @@ int main(int argc, char **argv)
 			{
 				if((n = read(gl_env.clientfd, buf, 128)) < 0)
 					my_err("ERROR: cannot read from client\n");
-
-				my_str(gl_env.clientname);
-				my_str(": ");
-				my_str(buf);
-				my_char('\n');
+				
+				if(my_strcmp(buf, "/exit") != 0)
+				{
+					my_str(gl_env.clientname);
+					my_str(": ");
+					my_str(buf);
+					my_char('\n');
+				}
+				else
+					break;
 			}
+			close(gl_env.clientfd);
+			my_str("***");
+			my_str(gl_env.clientname);
+			my_str(" disconnected...\n");
+			exit(0);
 		}
 	}
 }
