@@ -19,6 +19,7 @@
 	{
 		int serverfd;
 		int clientfd;
+		char *clientname;
 		char childflg;
 	}		gl_env;
 #else

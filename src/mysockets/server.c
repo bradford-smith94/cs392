@@ -17,6 +17,8 @@ int main(int argc, char **argv)
 	struct sockaddr_in client_addr;
 	int port;
 	int pid;
+/*	char *buf;*/
+	int n;
 
 	signal(SIGINT, server_exit);
 	if(argc < 2)
@@ -50,9 +52,16 @@ int main(int argc, char **argv)
 		clientlen = sizeof(client_addr);
 		if((gl_env.clientfd = accept(gl_env.serverfd, (struct sockaddr *)&client_addr, &clientlen)) < 0)
 			my_err("ERROR: cannot accept connection\n");
+		if(!gl_env.clientname)
+			gl_env.clientname = (char*)xmalloc(128*sizeof(char));
+		if((n = read(gl_env.clientfd, gl_env.clientname, 128)) < 0)
+			my_err("ERROR: cannot read client name\n");
 		#ifdef DEBUG
-			my_str("***DEBUG***Client connected: going to fork!\n");
+			my_str("***DEBUG***Client connected: username: ");
+			my_str(gl_env.clientname);
+			my_str(" going to fork!\n");
 		#endif
+
 		if((pid = fork()) < 0)
 			my_err("ERROR: cannot fork process\n");
 		else if(pid == 0)

@@ -54,6 +54,8 @@ int main(int argc, char **argv)
 		my_char('\n');
 	#endif
 	
+	write(gl_sockfd, name, my_strlen(name));
+
 	while(1)
 	{
 		/*read/write stuff here*/
