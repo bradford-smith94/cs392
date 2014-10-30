@@ -46,7 +46,7 @@ int main(int argc, char **argv)
 		my_err("ERROR: cannot read from keyboard\n");
 
 	name = my_strdup(buf);
-	buf[n] = '\0';
+	name[n - 1] = '\0';
 
 	#ifdef DEBUG
 		my_str("***DEBUG***Username: ");
@@ -58,6 +58,13 @@ int main(int argc, char **argv)
 
 	while(1)
 	{
-		/*read/write stuff here*/
+		my_str(name);
+		my_str(": ");
+
+		if((n = read(0, buf, 128)) < 0)
+			my_err("ERROR: cannot read from keyboard\n");
+
+		buf[n - 1] = '\0';
+		write(gl_sockfd, buf, 128);
 	}
 }

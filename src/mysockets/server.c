@@ -17,7 +17,7 @@ int main(int argc, char **argv)
 	struct sockaddr_in client_addr;
 	int port;
 	int pid;
-/*	char *buf;*/
+	char *buf;
 	int n;
 
 	signal(SIGINT, server_exit);
@@ -44,6 +44,8 @@ int main(int argc, char **argv)
 		my_int(port);
 		my_char('\n');
 	#endif
+
+	buf = (char*)xmalloc(128*sizeof(char));
 	
 	while(1)
 	{
@@ -69,7 +71,13 @@ int main(int argc, char **argv)
 			gl_env.childflg = 1;
 			while(1)
 			{
-				/*read and write to client here*/
+				if((n = read(gl_env.clientfd, buf, 128)) < 0)
+					my_err("ERROR: cannot read from client\n");
+
+				my_str(gl_env.clientname);
+				my_str(": ");
+				my_str(buf);
+				my_char('\n');
 			}
 		}
 	}
