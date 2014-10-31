@@ -17,7 +17,7 @@ int main(int argc, char **argv)
 	int port;
 	char *name;
 	char *msg;
-	char *swap;
+	char *temp;
 
 	signal(SIGINT, cap_sigint);
 	if(argc < 3)
@@ -60,16 +60,16 @@ int main(int argc, char **argv)
 
 		if(my_strncmp(msg, "/nick", 5) == 0)
 		{
-			swap = msg;
-			swap += 5;
-			for(; *swap != '\0'; swap++)
-				if(*swap != ' ' && *swap != '\t')
+			temp = msg;
+			temp += 5;
+			for(; *temp != '\0'; temp++)
+				if(*temp != ' ' && *temp != '\t')
 					break;
 
-			if(my_strlen(swap))
+			if(my_strlen(temp))
 			{
 				free(name);
-				name = my_strdup(swap);
+				name = my_strdup(temp);
 				my_str("***Changed name to ");
 				my_str(name);
 				my_char('\n');
@@ -79,16 +79,16 @@ int main(int argc, char **argv)
 		}
 		else if(my_strncmp(msg, "/me", 3) == 0)
 		{
-			swap = msg;
-			swap += 3;
-			for(; *swap != '\0'; swap++)
-				if(*swap != ' ' && *swap != '\t')
+			temp = msg;
+			temp += 3;
+			for(; *temp != '\0'; temp++)
+				if(*temp != ' ' && *temp != '\t')
 					break;
-			if(!my_strlen(swap))
+			if(!my_strlen(temp))
 				my_str("***usage: /me something\n");
 		}
-		if(swap)
-			swap = NULL;
+		if(temp)
+			temp = NULL;
 
 		send_msg(msg);
 		free(msg);
