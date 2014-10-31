@@ -38,6 +38,8 @@ void my_err(char*);
 	void server_exit();
 	void send_reply(char*);
 	char* read_msg();
+	void print_msg(char*);
+	void disconnect();
 #else
 	void client_exit();
 	void send_msg(char*);

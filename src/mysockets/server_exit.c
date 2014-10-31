@@ -13,17 +13,17 @@ void server_exit()
 {
 	if(gl_env.childflg)
 	{
-		usleep(getpid());
+		usleep(getpid()*100);
 		send_reply("/exit");
-		if(close(gl_env.clientfd))
-			my_err("ERROR: cannot safely close client socket\n");
+		disconnect();
 		#ifdef DEBUG
 			my_str("***DEBUG***Exiting child process\n");
 		#endif
 	}
 	else
 	{
-		usleep(100000);
+		my_char('\n');
+		usleep(getpid()*200);
 		if(close(gl_env.serverfd))
 			my_err("ERROR: cannot safely close the socket\n");
 		my_str("\n***Shutting down the server...\n");

@@ -21,7 +21,7 @@ void read_reply()
 	if(my_strcmp(r, "/exit") == 0)
 	{
 		/*server is forcing a disconnect*/
-		my_str("***Server shutting down...\n");
+		my_str("***Server shut down...\n");
 		client_exit();
 	}
 	else if(my_strcmp(r, "/nack") == 0)

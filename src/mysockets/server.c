@@ -38,18 +38,17 @@ int main(int argc, char **argv)
 	if(bind(gl_env.serverfd, (struct sockaddr *)&serv_addr, sizeof(serv_addr)))
 		my_err("ERROR: cannot bind socket\n");
 	
-	#ifdef DEBUG
-		my_str("***DEBUG***Server started on port ");
-		my_int(port);
-		my_char('\n');
-	#endif
+	my_str("***Server started on port ");
+	my_int(port);
+	my_char('\n');
 
 	while(1)
 	{
 		listen(gl_env.serverfd, 5);
 
 		clientlen = sizeof(client_addr);
-		if((gl_env.clientfd = accept(gl_env.serverfd, (struct sockaddr *)&client_addr, &clientlen)) < 0)
+		gl_env.clientfd = accept(gl_env.serverfd, (struct sockaddr *)&client_addr, &clientlen);
+		if(gl_env.clientfd < 0)
 			my_err("ERROR: cannot accept connection\n");
 		gl_env.clientname = read_msg();
 		send_reply("/ack");
@@ -70,26 +69,8 @@ int main(int argc, char **argv)
 			while(1)
 			{
 				msg = read_msg();
-				
-				if(my_strncmp(msg, "/exit", 5) == 0)
-				{
-					send_reply("/nack");
-					break;
-				}
-				else
-				{
-					send_reply("/ack");
-					my_str(gl_env.clientname);
-					my_str(": ");
-					my_str(msg);
-					my_char('\n');
-				}
+				print_msg(msg);
 			}
-			close(gl_env.clientfd);
-			my_str("***");
-			my_str(gl_env.clientname);
-			my_str(" disconnected...\n");
-			exit(0);
 		}
 		free(gl_env.clientname);
 	}

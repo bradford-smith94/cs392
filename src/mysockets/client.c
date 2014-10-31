@@ -57,6 +57,22 @@ int main(int argc, char **argv)
 		my_str(": ");
 		msg = read_keyboard();
 
+		if(my_strncmp(msg, "/nick", 5) == 0)
+		{
+			if(my_strlen(msg) >= 7)
+			{
+				free(name);
+				name = my_strdup(&msg[6]);
+				my_str("***Changed name to ");
+				my_str(name);
+				my_char('\n');
+			}
+			else
+				my_str("***usage: /nick newName\n");
+		}
+		else if(my_strncmp(msg, "/me", 3) == 0 && my_strlen(msg) < 5)
+			my_str("***usage: /me something\n");
+
 		send_msg(msg);
 		free(msg);
 		read_reply();
