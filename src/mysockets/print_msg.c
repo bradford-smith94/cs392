@@ -15,7 +15,7 @@ void print_msg(char *msg)
 	{
 		if(my_strlen(msg) > 5)
 		{
-			if(msg[5] != ' ' || msg[5] != '\t')
+			if(msg[5] != ' ' && msg[5] != '\t')
 			{
 				send_reply("/ack");
 				my_str(gl_env.clientname);
