@@ -12,6 +12,5 @@
 void client_exit()
 {
 	my_str("\n***Exiting the client program...\n");
-	send_msg("/exit");
 	exit(0);
 }

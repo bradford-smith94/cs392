@@ -13,30 +13,52 @@ void print_msg(char *msg)
 {
 	if(my_strncmp(msg, "/exit", 5) == 0)
 	{
+		if(my_strlen(msg) > 5)
+		{
+			if(msg[5] != ' ' || msg[5] != '\t')
+			{
+				send_reply("/ack");
+				my_str(gl_env.clientname);
+				my_str(": ");
+				my_str(msg);
+				my_char('\n');
+			}
+		}
 		send_reply("/nack");
-		disconnect();
+		disconnect();	
 	}
 	else if(my_strncmp(msg, "/nick", 5) == 0)
 	{
 		send_reply("/ack");
-		if(my_strlen(msg) >= 7)
+		msg += 5;
+		for(; *msg != '\0'; msg++)
+				if(*msg != ' ' && *msg != '\t')
+					break;
+
+		if(my_strlen(msg))
 		{
 			my_str("***");
 			my_str(gl_env.clientname);
 			my_str(" changed name to ");
-			my_str(&msg[6]);
+			my_str(msg);
 			my_char('\n');
-			gl_env.clientname = &msg[6];
+			gl_env.clientname = msg;
 		}
 	}
 	else if(my_strncmp(msg, "/me", 3) == 0)
 	{
 		send_reply("/ack");
-		if(my_strlen(msg) >= 5)
+		msg += 3;
+		for(; *msg != '\0'; msg++)
+				if(*msg != ' ' && *msg != '\t')
+					break;
+
+		if(my_strlen(msg))
 		{
 			my_str("***");
 			my_str(gl_env.clientname);
-			my_str(&msg[3]);
+			my_char(' ');
+			my_str(msg);
 			my_char('\n');
 		}
 	}

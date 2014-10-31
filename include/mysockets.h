@@ -45,6 +45,7 @@ void my_err(char*);
 	void send_msg(char*);
 	char* read_keyboard();
 	void read_reply();
+	void cap_sigint();
 #endif
 
 #endif

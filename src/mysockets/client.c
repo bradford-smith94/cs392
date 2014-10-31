@@ -18,7 +18,7 @@ int main(int argc, char **argv)
 	char *name;
 	char *msg;
 
-	signal(SIGINT, client_exit);
+	signal(SIGINT, cap_sigint);
 	if(argc < 3)
 		my_err("usage: ./client serverName portNumber\n");
 	
