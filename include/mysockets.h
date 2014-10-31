@@ -36,8 +36,13 @@ int main(int, char**);
 void my_err(char*);
 #ifdef SERVER
 	void server_exit();
+	void send_reply(char*);
+	char* read_msg();
 #else
 	void client_exit();
+	void send_msg(char*);
+	char* read_keyboard();
+	void read_reply();
 #endif
 
 #endif

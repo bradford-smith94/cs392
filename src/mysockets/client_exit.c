@@ -11,7 +11,7 @@
 */
 void client_exit()
 {
-	my_str("***Exiting the client program...\n");
-	write(gl_sockfd, "/exit", 5);
+	my_str("\n***Exiting the client program...\n");
+	send_msg("/exit");
 	exit(0);
 }

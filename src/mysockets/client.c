@@ -16,8 +16,7 @@ int main(int argc, char **argv)
 	struct hostent *server;
 	int port;
 	char *name;
-	char *buf;
-	int n;
+	char *msg;
 
 	signal(SIGINT, client_exit);
 	if(argc < 3)
@@ -41,12 +40,7 @@ int main(int argc, char **argv)
 		my_err("ERROR: cannot connect to socket\n");
 	
 	my_str("Enter username: ");
-	buf = (char*)xmalloc(128*sizeof(char));
-	if((n = read(0, buf, 128)) < 0)
-		my_err("ERROR: cannot read from keyboard\n");
-
-	name = my_strdup(buf);
-	name[n - 1] = '\0';
+	name = read_keyboard();
 
 	#ifdef DEBUG
 		my_str("***DEBUG***Username: ");
@@ -54,20 +48,17 @@ int main(int argc, char **argv)
 		my_char('\n');
 	#endif
 	
-	write(gl_sockfd, name, my_strlen(name));
-
+	send_msg(name);
+	read_reply();
+	
 	while(1)
 	{
 		my_str(name);
 		my_str(": ");
+		msg = read_keyboard();
 
-		if((n = read(0, buf, 128)) < 0)
-			my_err("ERROR: cannot read from keyboard\n");
-
-		if(my_strcmp(buf, "/exit") == 0)
-			client_exit();
-
-		buf[n - 1] = '\0';
-		write(gl_sockfd, buf, 128);
+		send_msg(msg);
+		free(msg);
+		read_reply();
 	}
 }

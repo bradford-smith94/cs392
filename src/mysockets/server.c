@@ -17,8 +17,7 @@ int main(int argc, char **argv)
 	struct sockaddr_in client_addr;
 	int port;
 	int pid;
-	char *buf;
-	int n;
+	char *msg;
 
 	signal(SIGINT, server_exit);
 	if(argc < 2)
@@ -45,8 +44,6 @@ int main(int argc, char **argv)
 		my_char('\n');
 	#endif
 
-	buf = (char*)xmalloc(128*sizeof(char));
-	
 	while(1)
 	{
 		listen(gl_env.serverfd, 5);
@@ -54,16 +51,17 @@ int main(int argc, char **argv)
 		clientlen = sizeof(client_addr);
 		if((gl_env.clientfd = accept(gl_env.serverfd, (struct sockaddr *)&client_addr, &clientlen)) < 0)
 			my_err("ERROR: cannot accept connection\n");
-		if(!gl_env.clientname)
-			gl_env.clientname = (char*)xmalloc(128*sizeof(char));
-		if((n = read(gl_env.clientfd, gl_env.clientname, 128)) < 0)
-			my_err("ERROR: cannot read client name\n");
+		gl_env.clientname = read_msg();
+		send_reply("/ack");
+
 		#ifdef DEBUG
 			my_str("***DEBUG***Client connected: username: ");
 			my_str(gl_env.clientname);
 			my_str(" going to fork!\n");
 		#endif
-
+		my_str("***");
+		my_str(gl_env.clientname);
+		my_str(" has connected.\n");
 		if((pid = fork()) < 0)
 			my_err("ERROR: cannot fork process\n");
 		else if(pid == 0)
@@ -71,18 +69,21 @@ int main(int argc, char **argv)
 			gl_env.childflg = 1;
 			while(1)
 			{
-				if((n = read(gl_env.clientfd, buf, 128)) < 0)
-					my_err("ERROR: cannot read from client\n");
+				msg = read_msg();
 				
-				if(my_strcmp(buf, "/exit") != 0)
+				if(my_strncmp(msg, "/exit", 5) == 0)
 				{
-					my_str(gl_env.clientname);
-					my_str(": ");
-					my_str(buf);
-					my_char('\n');
+					send_reply("/nack");
+					break;
 				}
 				else
-					break;
+				{
+					send_reply("/ack");
+					my_str(gl_env.clientname);
+					my_str(": ");
+					my_str(msg);
+					my_char('\n');
+				}
 			}
 			close(gl_env.clientfd);
 			my_str("***");
@@ -90,5 +91,6 @@ int main(int argc, char **argv)
 			my_str(" disconnected...\n");
 			exit(0);
 		}
+		free(gl_env.clientname);
 	}
 }
