@@ -12,7 +12,7 @@
 #include <fcntl.h>
 #include <termios.h>
 #include <sys/termios.h>
-#include "../lib/my.h"
+#include "my.h"
 #include <signal.h>
 #include <unistd.h>
 #include <stdlib.h>
@@ -44,8 +44,8 @@
 #define UNDER_END "ue"
 #define CURSOROFF "vi"
 #define CURSORON "ve"
-#define VECAP "\E[?25h" // actual string for VE in case tgetstr doesn't find it
-#define VICAP "\E[?25l" // same as above but for VI
+#define VECAP "\E[?25h" /*actual string for VE in case tgetstr doesn't find it*/
+#define VICAP "\E[?25l" /*same as above but for VI*/
 #define ESC 27
 
 typedef struct	s_elem
@@ -77,24 +77,26 @@ typedef struct	s_env
   int		flag;
   int		stdio_backup;
   int		nbelems;
+  int		numrows;
   int		pos;
   t_elem	*elements;
 }		t_env;
 
 t_env	gl_env;
-// created as a structure to limit number of globals to 1
+/* created as a structure to limit number of globals to 1*/
 
-void	init_terminal();
-void	restore_terminal();
-char	*term_get_cap(char*);
-void	init_caps();
-int		my_termprint(int);
-void	term_clear();
-void	term_vi();
-void	term_ve();
-char	check_character(char *c);
-char	get_win_size();
-void	show_elems();
+int		main(int, char**);
+//void	init_terminal();
+//void	restore_terminal();
+//char	*term_get_cap(char*);
+//void	init_caps();
+//int		my_termprint(int);
+//void	term_clear();
+//void	term_vi();
+//void	term_ve();
+//char	check_character(char *c);
+//char	get_win_size();
+//void	show_elems();
 void	refreshin();
 void	refreshout(int);
 void	moveup();
@@ -102,12 +104,12 @@ void	movedown();
 void	moveleft();
 void	moveright();
 void	doselect();
-void	getout(char);
-void	setup_elems(int, char**);
-char	check_char(char*);
-void	term_move_to_item(int);
-void	term_underline();
-void	term_standout();
-void	term_standend();
-void	term_underend();
+//void	getout(char);
+//void	setup_elems(int, char**);
+//char	check_char(char*);
+//void	term_move_to_item(int);
+//void	term_underline();
+//void	term_standout();
+//void	term_standend();
+//void	term_underend();
 #endif
