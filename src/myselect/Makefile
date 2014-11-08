@@ -5,7 +5,8 @@
 
 NAME=myselect
 SRC=main.c refreshin.c refreshout.c moveup.c movedown.c moveleft.c moveright.c \
-	doselect.c
+	doselect.c term_get_cap.c my_termprint.c term_clear.c term_move_to_item.c \
+	show_elems.c init_caps.c get_win_size.c
 OBJ=$(SRC:.c=.o)
 RM=rm -f
 INCLPATH=../../include
