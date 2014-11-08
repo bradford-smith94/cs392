@@ -16,5 +16,5 @@ void term_move_to_item(int pos)
 
 	x = gl_env.elements[pos].x;
 	y = gl_env.elements[pos].y;
-	tputs(tgoto(gl_env.cursor, x, y), 1, my_termprint);
+	tputs(tgoto(gl_env.move, x, y), 1, my_termprint);
 }
