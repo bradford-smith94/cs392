@@ -85,8 +85,8 @@ t_env	gl_env;
 /* created as a structure to limit number of globals to 1*/
 
 int		main(int, char**);
-//void	init_terminal();
-//void	restore_terminal();
+void	init_terminal();
+void	restore_terminal();
 char	*term_get_cap(char*);
 void	init_caps();
 int		my_termprint(int);
