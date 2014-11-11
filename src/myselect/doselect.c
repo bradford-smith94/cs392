@@ -11,9 +11,9 @@
 */
 void doselect()
 {
-	if(!gl_env.element[pos].mode)
-		gl_env.element[pos].mode = 1;
+	if(!gl_env.elements[gl_env.pos].mode)
+		gl_env.elements[gl_env.pos].mode = 1;
 	else
-		gl_env.element[pos].mode = 0;
+		gl_env.elements[gl_env.pos].mode = 0;
 	refreshin();
 }

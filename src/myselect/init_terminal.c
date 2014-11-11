@@ -14,11 +14,12 @@ void init_terminal()
 	struct termio line;
 	int fd;
 	char *name;
-
-	gl_env.line_backup = ioctl(0, TCGETA, &line)
-	line.c_lflags &= ~(ICANON | ECHO | ISIG);
-	line.c_lflags[VMIN] = READMIN;
-	line.c_lflags[VTIME] = READTIME;
+	
+	ioctl(0, TCGETA, &line);
+	gl_env.line_backup = line;
+	line.c_lflag &= ~(ICANON | ECHO | ISIG);
+	line.c_cc[VMIN] = READMIN;
+	line.c_cc[VTIME] = READTIME;
 	ioctl(0, TCSETA, &line);
 
 	name = ttyname(0);

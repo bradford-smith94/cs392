@@ -13,6 +13,6 @@
 void movedown()
 {
 	refreshout(gl_env.pos);
-	gl_env.pos = ++gl_env.pos % gl_env.nbelems;
+	gl_env.pos = (++gl_env.pos) % gl_env.nbelems;
 	refreshin();
 }

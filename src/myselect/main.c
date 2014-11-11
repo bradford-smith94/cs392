@@ -12,20 +12,25 @@
 */
 int main(int argc, char **argv)
 {
-	/*TODO
-	check arguments
-	signal SIGWINCH
-	get caps
-	change i/o
-	hide cursor
-	clear screen
-	setup array of elements
-	show items
-	while 1 read keyboard
-	show cursor
-	retore stuff
-	clear screen
-	if enter show output
-	*/
+	char enterflg;
+
+	if(argc < 2)
+	{
+		my_str("usage: ./myselect files [more files]...\n");
+		exit(-1);
+	}
+	signal(SIGWINCH, );
+	init_caps();
+	init_terminal();
+	setup_elems();
+	show_elems();
+	enterflg = 0;
+	while(1)
+	{
+		/*TODO
+		read keyboard input*/
+	}
+	restore_terminal();
+	getout(enterflg);
 	return 0;
 }

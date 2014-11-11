@@ -15,7 +15,7 @@ void refreshin()
 	term_underline();
 	if(gl_env.elements[gl_env.pos].mode)
 		term_standout();
-	my_str(gl_env.elements[gl_env.pos]);
+	my_str(gl_env.elements[gl_env.pos].elem);
 	term_standend();
 	term_underend();
 }
