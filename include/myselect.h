@@ -28,10 +28,10 @@
 #define NULL (0)
 #endif
 
-#define KU "\E[A"
-#define KD "\E[B"
-#define KR "\E[C"
-#define KL "\E[D"
+#define KU "\033[A" /*\E is gnu shortcut, to avoid pedantic error use \033*/
+#define KD "\033[B"
+#define KR "\033[C"
+#define KL "\033[D"
 #define UP "ku"
 #define DOWN "kd"
 #define LEFT "kl"
@@ -44,8 +44,8 @@
 #define UNDER_END "ue"
 #define CURSOROFF "vi"
 #define CURSORON "ve"
-#define VECAP "\E[?25h" /*actual string for VE in case tgetstr doesn't find it*/
-#define VICAP "\E[?25l" /*same as above but for VI*/
+#define VECAP "\033[?25h" /*actual string for VE in case tgetstr doesn't find it*/
+#define VICAP "\033[?25l" /*same as above but for VI*/
 #define ESC 27
 
 typedef struct	s_elem

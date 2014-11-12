@@ -11,6 +11,12 @@
 */
 void init_caps()
 {
+	char bp[2048];
+	char *term;
+
+	term = getenv("TERM");
+	tgetent(bp, term);
+
 	gl_env.left = term_get_cap(LEFT);
 	gl_env.right = term_get_cap(RIGHT);
 	gl_env.up = term_get_cap(UP);
