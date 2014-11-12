@@ -23,4 +23,5 @@ void getout(char flag)
 				my_char(' ');
 			}
 	}
+	my_str("\nThank you for using myselect!\n");
 }
