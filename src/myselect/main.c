@@ -13,7 +13,7 @@
 int main(int argc, char **argv)
 {
 	char enterflg;
-	char buf[5];
+	char buf[256];
 	int n;
 
 	if(argc < 2)
@@ -28,7 +28,7 @@ int main(int argc, char **argv)
 	enterflg = 0;
 	while(1)
 	{
-		if((n = read(0, buf, 4)) < 0)
+		if((n = read(0, buf, 255)) < 0)
 		{
 			my_str("ERROR: cannot read from keyboard\n");
 			if(enterflg)
@@ -36,13 +36,13 @@ int main(int argc, char **argv)
 			break;
 		}
 		buf[n] = '\0';
-		if(my_strcmp(buf, gl_env.up) == 0)
+		if(my_strcmp(buf, KU) == 0)
 			moveup();
-		else if(my_strcmp(buf, gl_env.down) == 0)
+		else if(my_strcmp(buf, KD) == 0)
 			movedown();
-		else if(my_strcmp(buf, gl_env.left) == 0)
+		else if(my_strcmp(buf, KL) == 0)
 			moveleft();
-		else if(my_strcmp(buf, gl_env.right) == 0)
+		else if(my_strcmp(buf, KR) == 0)
 			moveright();
 		else if(my_strcmp(buf, " ") == 0)
 			doselect();

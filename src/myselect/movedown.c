@@ -14,7 +14,7 @@ void movedown()
 {
 	refreshout(gl_env.pos);
 	gl_env.pos++;
-	if(gl_env.pos > gl_env.nbelems)
+	if(gl_env.pos >= gl_env.nbelems)
 		gl_env.pos %= gl_env.nbelems;
 	refreshin();
 }
