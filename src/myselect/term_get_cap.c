@@ -15,6 +15,10 @@ char* term_get_cap(char *cap)
 	char *ret;
 	if(!(ret = tgetstr(cap, (char**)&area)))
 	{
+		if(my_strcmp(cap, "vi") == 0)
+			return VICAP;
+		if(my_strcmp(cap, "ve") == 0)
+			return VECAP;
 		my_str("Unable to get termcap: ");
 		my_str(cap);
 		my_char('\n');

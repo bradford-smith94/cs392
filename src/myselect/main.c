@@ -13,7 +13,7 @@
 int main(int argc, char **argv)
 {
 	char enterflg;
-	char buf[256];
+	char buf[5];
 	int n;
 
 	if(argc < 2)
@@ -22,21 +22,20 @@ int main(int argc, char **argv)
 		exit(-1);
 	}
 	signal(SIGWINCH, show_elems);
-	init_caps();
-	init_terminal();
+	init_terminal();/*calls init_caps, term_vi, and term_clear*/
 	setup_elems(argc, argv);
 	show_elems();
 	enterflg = 0;
 	while(1)
 	{
-		if((n = read(0, buf, 255)) < 0)
+		if((n = read(0, buf, 4)) < 0)
 		{
 			my_str("ERROR: cannot read from keyboard\n");
 			if(enterflg)
 				enterflg = 0;
 			break;
 		}
-		buf[n - 1] = '\0';
+		buf[n] = '\0';
 		if(my_strcmp(buf, gl_env.up) == 0)
 			moveup();
 		else if(my_strcmp(buf, gl_env.down) == 0)
@@ -45,9 +44,11 @@ int main(int argc, char **argv)
 			moveleft();
 		else if(my_strcmp(buf, gl_env.right) == 0)
 			moveright();
+		else if(my_strcmp(buf, " ") == 0)
+			doselect();
 		else if(my_strcmp(buf, gl_env.esc) == 0)
 			break;
-		else if(my_strcmp(buf, "") == 0)
+		else if(my_strcmp(buf, "\n") == 0)
 		{
 			/*only a single \n was read (enter pressed)*/
 			enterflg = 1;

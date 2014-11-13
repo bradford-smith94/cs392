@@ -42,4 +42,5 @@ void show_elems()
 		if(!gl_env.flag)
 			refreshin();
 	}
+	gl_env.pos = 0;
 }

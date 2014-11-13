@@ -28,8 +28,8 @@ void init_caps()
 	gl_env.stand_end = term_get_cap(STAND_END);
 	gl_env.move = term_get_cap(MOVE);
 	gl_env.clear = term_get_cap(CLEAR);
-	/*gl_env.cursoroff = VICAP;
-	gl_env.cursoron = VECAP;*/
 	gl_env.cursoroff = term_get_cap(CURSOROFF);
+	/*term_get_cap will return VICAP if not found*/
 	gl_env.cursoron = term_get_cap(CURSORON);
+	/*same with VECAP*/
 }
