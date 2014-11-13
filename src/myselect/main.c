@@ -23,7 +23,9 @@ int main(int argc, char **argv)
 	signal(SIGWINCH, show_elems);
 	init_terminal();/*calls init_caps, term_vi, and term_clear*/
 	setup_elems(argc - 1, &argv[1]);
-	show_elems();
+	#ifndef DEBUG
+		show_elems();
+	#endif
 	while(1)
 	{
 		if((n = read(0, buf, 255)) < 0)
@@ -32,20 +34,13 @@ int main(int argc, char **argv)
 			getout(0);
 		}
 		buf[n] = '\0';
-		if(my_strcmp(buf, KU) == 0)
-			moveup();
-		else if(my_strcmp(buf, KD) == 0)
-			movedown();
-		else if(my_strcmp(buf, KL) == 0)
-			moveleft();
-		else if(my_strcmp(buf, KR) == 0)
-			moveright();
-		else if(my_strcmp(buf, " ") == 0)
-			doselect();
-		else if(my_strcmp(buf, gl_env.esc) == 0)
-			getout(0);
-		else if(my_strcmp(buf, "\n") == 0)
-			getout(1);
+		#ifdef DEBUG
+			my_int(n);
+			my_str("\nkeystroke: ");
+			my_str(buf);
+			my_str("<\n");
+		#endif
+		check_char(buf);
 	}
 	return 0;
 }

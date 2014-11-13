@@ -104,7 +104,7 @@ void	moveright();
 void	doselect();
 void	getout(char);
 void	setup_elems(int, char**);
-/*char	check_char(char*);*/
+char	check_char(char*);
 void	term_move_to_item(int);
 void	term_underline();
 void	term_standout();
