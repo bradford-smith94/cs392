@@ -12,7 +12,7 @@
 */
 int main(int argc, char **argv)
 {
-	char buf[256];
+	char buf[5];
 	int n;
 
 	if(argc < 2)
@@ -23,12 +23,10 @@ int main(int argc, char **argv)
 	signal(SIGWINCH, show_elems);
 	init_terminal();/*calls init_caps, term_vi, and term_clear*/
 	setup_elems(argc - 1, &argv[1]);
-	#ifndef DEBUG
-		show_elems();
-	#endif
+	show_elems();
 	while(1)
 	{
-		if((n = read(0, buf, 255)) < 0)
+		if((n = read(0, buf, 4)) < 0)
 		{
 			my_str("ERROR: cannot read from keyboard\n");
 			getout(0);

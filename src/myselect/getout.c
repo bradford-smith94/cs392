@@ -13,6 +13,11 @@ void getout(char flag)
 {
 	int i;
 
+	#ifdef DEBUG
+		my_str("getting out\n");
+	#endif
+	term_ve();
+	term_clear();
 	restore_terminal();
 	if(flag)
 	{
@@ -23,6 +28,5 @@ void getout(char flag)
 				my_char(' ');
 			}
 	}
-	my_str("\nThank you for using myselect!\n");
 	exit(0);
 }

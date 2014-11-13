@@ -12,6 +12,9 @@
 */
 char check_char(char* s)
 {
+	#ifdef DEBUG
+		my_str("checking\n");
+	#endif
 	if(my_strcmp(s, KU) == 0)
 		moveup();
 	else if(my_strcmp(s, KD) == 0)
@@ -22,7 +25,7 @@ char check_char(char* s)
 		moveright();
 	else if(my_strcmp(s, " ") == 0) /*spacebar*/
 		doselect();
-	else if(s[0] ==  *gl_env.esc && s[1] == '\0') /*esc*/
+	else if(s[0] == '\033' && s[1] == '\0') /*esc*/
 		getout(0);
 	else if(s[0] == '\n' && s[1] == '\0') /*enter*/
 		getout(1);
