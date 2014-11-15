@@ -1,10 +1,10 @@
 /*Bradford Smith (bsmith8)
-*read_msg.c mysockets project
-*10/30/2014
+*read_msg.c gtk project
+*11/15/2014
 *"I pledge my honor that I have abided by the Stevens Honor System."
 */
 
-#include "mysockets.h"
+#include "mygtksockets.h"
 
 /*pre: none
 *post: returns a pointer to an allocated string read in from the client

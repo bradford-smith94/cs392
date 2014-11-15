@@ -1,10 +1,10 @@
 /*Bradford Smith (bsmith8)
-*print_msg.c mysockets project
-*10/30/2014
+*print_msg.c gtk project
+*11/15/2014
 *"I pledge my honor that I have abided by the Stevens Honor System."
 */
 
-#include "mysockets.h"
+#include "mygtksockets.h"
 
 /*pre: takes in a char *s
 *post: parses and prints the string s

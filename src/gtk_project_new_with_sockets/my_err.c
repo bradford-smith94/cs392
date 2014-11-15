@@ -1,10 +1,10 @@
 /*Bradford Smith (bsmith8)
-*my_err.c mysockets project
-*10/26/2014
+*my_err.c gtk project
+*11/15/2014
 *"I pledge my honor that I have abided by the Stevens Honor System."
 */
 
-#include "mysockets.h"
+#include "mygtksockets.h"
 
 /*pre: takes in a char *s
 *post: prints s and exits with -1

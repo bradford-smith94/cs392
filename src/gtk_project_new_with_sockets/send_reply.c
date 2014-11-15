@@ -1,10 +1,10 @@
 /*Bradford Smith (bsmith8)
-*send_reply.c mysockets project
-*10/30/2014
+*send_reply.c gtk project
+*11/15/2014
 *"I pledge my honor that I have abided by the Stevens Honor System."
 */
 
-#include "mysockets.h"
+#include "mygtksockets.h"
 
 /*pre: takes in a char *s that is either "/ack", "/nack" or "/exit"
 *post: sends the string s to the client

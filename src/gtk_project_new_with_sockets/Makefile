@@ -1,6 +1,6 @@
 #Bradford Smith (bsmith8)
-#Makefile for mysockets
-#10/25/2014
+#Makefile for gtk project 
+#11/15/2014
 #"I pledge my honor that I have abided by the Stevens Honor System."
 
 SERVER=server

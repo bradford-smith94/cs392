@@ -1,10 +1,10 @@
 /*Bradford Smith (bsmith8)
-*server.c mysockets project
-*10/25/2014
+*server.c gtk project
+*11/15/2014
 *"I pledge my honor that I have abided by the Stevens Honor System."
 */
 
-#include "mysockets.h"
+#include "mygtksockets.h"
 
 /*pre: takes in an int argc and a char **argv
 *post: runs the server application with argc number of command line arguments
