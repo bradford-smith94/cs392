@@ -25,7 +25,7 @@ server: $(SERVEROBJ)
 	cc $(LDFLAGS) $(SERVEROBJ) $(LDLIBS) -o $(SERVER)
 
 client: CFLAGS+= `pkg-config --cflags gtk+-2.0`
-client: LDFLAGS+= `pkg-config --libs gtk+-2.0`
+client: LDLIBS+= `pkg-config --libs gtk+-2.0`
 client: $(CLIENTOBJ)
 	cc $(LDFLAGS) $(CLIENTOBJ) $(LDLIBS) -o $(CLIENT)
 

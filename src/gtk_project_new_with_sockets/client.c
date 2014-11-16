@@ -12,86 +12,39 @@
 */
 int main(int argc, char **argv)
 {
-	struct sockaddr_in serv_addr;
-	struct hostent *server;
-	int port;
-	char *name;
-	char *msg;
-	char *temp;
+	GtkWidget *win;
+	GtkWidget *tab;
+	GtkWidget *t;
 
-	signal(SIGINT, cap_sigint);
-	if(argc < 3)
-		my_err("usage: ./client serverName portNumber\n");
-	
-	port = my_atoi(argv[2]);
-	if(port < 0)
-		my_err("ERROR: invalid port number\n");
+	gtk_init(&argc, &argv);
+	win = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+	gtk_window_set_title(GTK_WINDOW(win), "mysockets client");
+	tab = gtk_table_new(3, 4, TRUE);
 
-	if((gl_sockfd = socket(AF_INET, SOCK_STREAM, 0)) < 0)
-		my_err("ERROR: cannot create socket\n");
+	t = gtk_label_new("Msg:");
+	gtk_table_attach_defaults(GTK_TABLE(tab), t, 0, 1, 0, 1);
+	gtk_widget_show(t);
 
-	if(!(server = gethostbyname(argv[1])))
-		my_err("ERROR: cannot resolve hostname\n");
+	t = gtk_text_view_new();
+	gtk_table_attach_defaults(GTK_TABLE(tab), t, 0, 3, 1, 2);
+	gtk_widget_show(t);
 
-	serv_addr.sin_family = AF_INET;
-	serv_addr.sin_port = htons(port);
-	memcpy(&serv_addr.sin_addr.s_addr, (server->h_addr), server->h_length);
+	t = gtk_button_new_with_label("Send");
+	gtk_table_attach_defaults(GTK_TABLE(tab), t, 3, 4, 1, 2);
+	gtk_widget_show(t);
 
-	if(connect(gl_sockfd, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0)
-		my_err("ERROR: cannot connect to socket\n");
-	
-	my_str("Enter username: ");
-	name = read_keyboard();
+	t = gtk_button_new_with_label("Connect");
+	gtk_table_attach_defaults(GTK_TABLE(tab), t, 0, 2, 2, 3);
+	gtk_widget_show(t);
 
-	#ifdef DEBUG
-		my_str("***DEBUG***Username: ");
-		my_str(name);
-		my_char('\n');
-	#endif
-	
-	send_msg(name);
-	read_reply();
-	
-	while(1)
-	{
-		my_str(name);
-		my_str(": ");
-		msg = read_keyboard();
+	t = gtk_button_new_with_label("Quit");
+	gtk_table_attach_defaults(GTK_TABLE(tab), t, 2, 4, 2, 3);
+	gtk_widget_show(t);
 
-		if(my_strncmp(msg, "/nick", 5) == 0)
-		{
-			temp = msg;
-			temp += 5;
-			for(; *temp != '\0'; temp++)
-				if(*temp != ' ' && *temp != '\t')
-					break;
+	gtk_container_add(GTK_CONTAINER(win), tab);
+	gtk_widget_show(tab);
+	gtk_widget_show(win);
 
-			if(my_strlen(temp))
-			{
-				free(name);
-				name = my_strdup(temp);
-				my_str("***Changed name to ");
-				my_str(name);
-				my_char('\n');
-			}
-			else
-				my_str("***usage: /nick newName\n");
-		}
-		else if(my_strncmp(msg, "/me", 3) == 0)
-		{
-			temp = msg;
-			temp += 3;
-			for(; *temp != '\0'; temp++)
-				if(*temp != ' ' && *temp != '\t')
-					break;
-			if(!my_strlen(temp))
-				my_str("***usage: /me something\n");
-		}
-		if(temp)
-			temp = NULL;
-
-		send_msg(msg);
-		free(msg);
-		read_reply();
-	}
+	gtk_main();
+	return 0;
 }
