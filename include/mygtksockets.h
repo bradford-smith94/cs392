@@ -25,6 +25,7 @@
 #else
 	#include <netdb.h>
 	#include <gtk/gtk.h>/*for gtk stuff, compile with pkg-config*/
+	#include <gdk/gdkkeysyms.h>/*for key constants, i.e. GDK_Return*/
 	int gl_sockfd;	
 #endif
 
@@ -49,6 +50,11 @@ void my_err(char*);
 	void read_reply();
 	void cap_sigint();
 	void init_main_win();
+	void delete_cb(GtkWidget*, GdkEvent*, gpointer);
+	void destroy_cb(GtkWidget*, gpointer);
+	void key_press_cb(GtkWidget*, GdkEventKey*, gpointer);
+	void send_cb(GtkWidget*, gpointer);
+	void connect_cb(GtkWidget*, gpointer);
 #endif
 
 #endif
