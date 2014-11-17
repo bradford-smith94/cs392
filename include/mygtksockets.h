@@ -48,6 +48,7 @@ void my_err(char*);
 	char* read_keyboard();
 	void read_reply();
 	void cap_sigint();
+	void init_main_win();
 #endif
 
 #endif

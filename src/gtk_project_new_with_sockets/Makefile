@@ -6,7 +6,8 @@
 SERVER=server
 CLIENT=client
 SERVERSRC= server.c my_err.c server_exit.c read_msg.c send_reply.c print_msg.c disconnect.c
-CLIENTSRC= client.c my_err.c client_exit.c send_msg.c read_keyboard.c read_reply.c cap_sigint.c
+CLIENTSRC= client.c my_err.c client_exit.c send_msg.c read_keyboard.c read_reply.c cap_sigint.c \
+			init_main_win.c
 SERVEROBJ=$(SERVERSRC:.c=.o)
 CLIENTOBJ=$(CLIENTSRC:.c=.o)
 RM=rm -f
