@@ -41,7 +41,7 @@ void init_main_win()
 	gtk_widget_show(t);
 
 	t = gtk_button_new_with_label("Quit");
-	g_signal_connect_swapped(G_OBJECT(t), "clicked", G_CALLBACK(gtk_widget_destroy), G_OBJECT(win));
+	g_signal_connect(G_OBJECT(t), "clicked", G_CALLBACK(quit_cb), G_OBJECT(win));
 	gtk_table_attach_defaults(GTK_TABLE(tab), t, 2, 4, 2, 3);
 	gtk_widget_show(t);
 

@@ -9,7 +9,8 @@
 /*pre:
 *post: prints an error message to the terminal
 */
-void delete_cb(GtkWidget *w, GdkEvent *e, gpointer data)
+gboolean delete_cb(GtkWidget *w, GdkEvent *e, gpointer data)
 {
 	my_str("ERROR: close window button pressed, use the quit button instead.\n");
+	return TRUE;
 }

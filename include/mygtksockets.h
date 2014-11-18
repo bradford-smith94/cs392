@@ -32,7 +32,7 @@
 /* This is the header for the gtk project,
 * it runs a client and server application where the client can send messages
 * to the server using sockets. The client application uses gtk to display a 
-* graphical program. This application can support multiple client
+* graphical program. The server application can support multiple client
 * connections.
 */
 int main(int, char**);
@@ -50,8 +50,9 @@ void my_err(char*);
 	void read_reply();
 	void cap_sigint();
 	void init_main_win();
-	void delete_cb(GtkWidget*, GdkEvent*, gpointer);
-	void destroy_cb(GtkWidget*, gpointer);
+	gboolean delete_cb(GtkWidget*, GdkEvent*, gpointer);
+	gboolean destroy_cb(GtkWidget*, gpointer);
+	void quit_cb(GtkWidget*, gpointer);
 	void key_press_cb(GtkWidget*, GdkEventKey*, gpointer);
 	void send_cb(GtkWidget*, gpointer);
 	void connect_cb(GtkWidget*, gpointer);

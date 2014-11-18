@@ -6,11 +6,11 @@
 
 #include "mygtksockets.h"
 
-/*pre: none
-*post: produces a pop-up window
-*	asks the user if they are sure they want to quit
+/*pre: takes in a GtkWidget *w, and gpointer data
+*post: exits the application and allows the window to be destroyed
 */
-void destroy_cb(GtkWidget *w, gpointer data)
+gboolean destroy_cb(GtkWidget *w, gpointer data)
 {
 	gtk_main_quit();
+	return FALSE;
 }
