@@ -56,6 +56,7 @@ void my_err(char*);
 	void key_press_cb(GtkWidget*, GdkEventKey*, gpointer);
 	void send_cb(GtkWidget*, gpointer);
 	void connect_cb(GtkWidget*, gpointer);
+	gchar* get_text_from_textview(GtkWidget *t);
 #endif
 
 #endif
