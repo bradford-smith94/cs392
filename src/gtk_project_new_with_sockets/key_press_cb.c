@@ -6,7 +6,7 @@
 
 #include "mygtksockets.h"
 
-/*pre: none
+/*pre: takes in a GtkWidget *w, GdkEventKey *k, and gpointer data
 *post: checks if the key pressed was enter
 *	if yes then call the send_cb
 */

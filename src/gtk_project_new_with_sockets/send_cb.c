@@ -6,7 +6,7 @@
 
 #include "mygtksockets.h"
 
-/*pre: 
+/*pre: takes in a GtkWidget *w, and gpointer data
 *post: gets the text from the text view and sends it to the server
 */
 void send_cb(GtkWidget *w, gpointer data)

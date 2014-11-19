@@ -6,8 +6,8 @@
 
 #include "mygtksockets.h"
 
-/*pre:
-*post: prints an error message to the terminal
+/*pre: takes in a GtkWidget *w, GdkEvent *e, and gpointer data
+*post: prints an error message to the terminal and ignores the delete
 */
 gboolean delete_cb(GtkWidget *w, GdkEvent *e, gpointer data)
 {
