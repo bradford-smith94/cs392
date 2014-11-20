@@ -7,6 +7,7 @@
 #include "mygtksockets.h"
 
 /*pre: takes in a GtkWidget *w, and gpointer data
+*		data points to a GtkWidget that is a textview
 *post: gets the text from the text view and sends it to the server
 */
 void send_cb(GtkWidget *w, gpointer data)
@@ -16,4 +17,5 @@ void send_cb(GtkWidget *w, gpointer data)
 		my_str(get_text_from_textview(GTK_WIDGET(data)));
 		my_str("<\n");
 	#endif
+	send_msg(get_text_from_textview(GTK_WIDGET(data)));
 }
