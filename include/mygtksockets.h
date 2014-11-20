@@ -53,7 +53,7 @@ void my_err(char*);
 	gboolean delete_cb(GtkWidget*, GdkEvent*, gpointer);
 	gboolean destroy_cb(GtkWidget*, gpointer);
 	void quit_cb(GtkWidget*, gpointer);
-	void key_press_cb(GtkWidget*, GdkEventKey*, gpointer);
+	gboolean key_press_cb(GtkWidget*, GdkEventKey*, gpointer);
 	void send_cb(GtkWidget*, gpointer);
 	void connect_cb(GtkWidget*, gpointer);
 	gchar* get_text_from_textview(GtkWidget *t);

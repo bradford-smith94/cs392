@@ -14,8 +14,15 @@ gchar* get_text_from_textview(GtkWidget *t)
 	GtkTextIter start;
 	GtkTextIter end;
 	GtkTextBuffer *buf;
+	gchar *text;
 	
 	buf = gtk_text_view_get_buffer(GTK_TEXT_VIEW(t));
 	gtk_text_buffer_get_bounds(buf, &start, &end);
-	return gtk_text_buffer_get_text(buf, &start, &end, FALSE);
+	text = gtk_text_buffer_get_text(buf, &start, &end, FALSE);
+	#ifdef DEBUG
+		my_str("Getting text from textview: '");
+		my_str(text);
+		my_char('\'');
+	#endif
+	return text;
 }

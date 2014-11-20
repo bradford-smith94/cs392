@@ -10,11 +10,15 @@
 *post: checks if the key pressed was enter
 *	if yes then call the send_cb
 */
-void key_press_cb(GtkWidget *w, GdkEventKey *k, gpointer data)
+gboolean key_press_cb(GtkWidget *w, GdkEventKey *k, gpointer data)
 {
 	if(k->type == GDK_KEY_PRESS)
 	{
 		if(k->keyval == GDK_Return)
-			send_cb(NULL, NULL);
+		{
+			send_cb(NULL, data);
+			return TRUE;
+		}
 	}
+	return FALSE;
 }

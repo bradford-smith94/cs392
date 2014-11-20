@@ -11,4 +11,9 @@
 */
 void send_cb(GtkWidget *w, gpointer data)
 {
+	#ifdef DEBUG
+		my_str("Send called: ");
+		my_str(get_text_from_textview(GTK_WIDGET(data)));
+		my_str("<\n");
+	#endif
 }
