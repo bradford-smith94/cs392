@@ -26,7 +26,13 @@
 	#include <netdb.h>
 	#include <gtk/gtk.h>/*for gtk stuff, compile with pkg-config*/
 	#include <gdk/gdkkeysyms.h>/*for key constants, i.e. GDK_Return*/
-	int gl_sockfd;	
+	struct s_env
+	{
+		GtkWidget *server;/*gtk widget pointers to the text fields in the connect window*/
+		GtkWidget *port;
+		GtkWidget *username;
+		int sockfd;
+	}		gl_env;
 #endif
 
 /* This is the header for the gtk project,
@@ -56,6 +62,7 @@ void my_err(char*);
 	gboolean key_press_cb(GtkWidget*, GdkEventKey*, gpointer);
 	void send_cb(GtkWidget*, gpointer);
 	void connect_cb(GtkWidget*, gpointer);
+	void connect_confirm_cb(GtkWidget*, gpointer);
 	gchar* get_text_from_textview(GtkWidget *t);
 #endif
 

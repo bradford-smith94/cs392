@@ -31,6 +31,7 @@ void connect_cb(GtkWidget *w, gpointer data)
 		b = gtk_text_view_new();
 		gtk_table_attach_defaults(GTK_TABLE(tab), b, 1, 2, 0, 1);
 		gtk_widget_show(b);
+		gl_env.server = b;
 
 		b = gtk_label_new("Port");
 		gtk_table_attach_defaults(GTK_TABLE(tab), b, 0, 1, 1, 2);
@@ -39,6 +40,7 @@ void connect_cb(GtkWidget *w, gpointer data)
 		b = gtk_text_view_new();
 		gtk_table_attach_defaults(GTK_TABLE(tab), b, 1, 2, 1, 2);
 		gtk_widget_show(b);
+		gl_env.port = b;
 
 		b = gtk_label_new("Username");
 		gtk_table_attach_defaults(GTK_TABLE(tab), b, 0, 1, 2, 3);
@@ -47,9 +49,10 @@ void connect_cb(GtkWidget *w, gpointer data)
 		b = gtk_text_view_new();
 		gtk_table_attach_defaults(GTK_TABLE(tab), b, 1, 2, 2, 3);
 		gtk_widget_show(b);
+		gl_env.username = b;
 
 		b = gtk_button_new_with_label("Ok");
-		/*TODO g_signal_connect(G_OBJECT(b), "clicked", G_CALLBACK(...), NULL);*/
+		g_signal_connect(G_OBJECT(b), "clicked", G_CALLBACK(connect_confirm_cb), G_OBJECT(win));
 		gtk_table_attach_defaults(GTK_TABLE(tab), b, 0, 1, 3, 4);
 		gtk_widget_show(b);
 
@@ -65,9 +68,8 @@ void connect_cb(GtkWidget *w, gpointer data)
 	else
 	{
 		if(win != NULL)
-		{
 			gtk_widget_destroy(win);
-			win = NULL;
-		}
+		send_msg("/exit");/*disconnect*/
+		read_reply();
 	}
 }

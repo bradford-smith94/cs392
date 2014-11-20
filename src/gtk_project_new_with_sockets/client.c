@@ -12,6 +12,7 @@
 */
 int main(int argc, char **argv)
 {
+	signal(SIGINT, cap_sigint);
 	gtk_init(&argc, &argv);
 	init_main_win();
 	gtk_main();

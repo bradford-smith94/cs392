@@ -13,6 +13,6 @@ void send_msg(char *s)
 {
 	int n;
 
-	if((n = write(gl_sockfd, s, my_strlen(s))) < 0)
+	if((n = write(gl_env.sockfd, s, my_strlen(s))) < 0)
 		my_err("ERROR: cannot write to server\n");
 }

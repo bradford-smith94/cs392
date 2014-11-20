@@ -15,7 +15,7 @@ void read_reply()
 	char r[256];
 	int n;
 
-	if((n = read(gl_sockfd, r, 255)) < 0)
+	if((n = read(gl_env.sockfd, r, 255)) < 0)
 		my_err("ERROR: cannot read reply from server\n");
 	r[n] = '\0';/*make sure the last character is \0*/
 	if(my_strcmp(r, "/exit") == 0)
