@@ -14,7 +14,10 @@ void read_reply()
 {
 	char r[256];
 	int n;
-
+	
+	#ifdef DEBUG
+		my_str("***DEBUG***Reading server reply\n");
+	#endif
 	if((n = read(gl_env.sockfd, r, 255)) < 0)
 		my_err("ERROR: cannot read reply from server\n");
 	r[n] = '\0';/*make sure the last character is \0*/

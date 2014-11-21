@@ -12,5 +12,6 @@
 gboolean destroy_cb(GtkWidget *w, gpointer data)
 {
 	gtk_main_quit();
+	my_str("\n***Exiting the client application\n");
 	return FALSE;
 }

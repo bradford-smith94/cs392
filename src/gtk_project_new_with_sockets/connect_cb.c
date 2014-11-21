@@ -67,9 +67,11 @@ void connect_cb(GtkWidget *w, gpointer data)
 	}
 	else
 	{
+		#ifdef DEBUG
+			my_str("***DEBUG***Disconnecting via connect button\n");
+		#endif
 		if(win != NULL)
 			gtk_widget_destroy(win);
-		send_msg("/exit");/*disconnect*/
-		read_reply();
+		cap_sigint();/*disconnect*/
 	}
 }

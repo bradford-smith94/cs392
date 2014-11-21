@@ -11,6 +11,19 @@
 */
 void cap_sigint()
 {
-	send_msg("/exit");
-	read_reply();
+	if(gl_env.sockfd)
+	{
+		#ifdef DEBUG
+			my_str("***DEBUG***Cap_sigint sending exit\n");
+		#endif
+		send_msg("/exit");
+		read_reply();
+	}
+	else
+	{
+		#ifdef DEBUG
+			my_str("***DEBUG***Cap_sigint calling client_exit()\n");
+		#endif
+		client_exit();
+	}
 }

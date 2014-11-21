@@ -31,8 +31,9 @@
 		GtkWidget *server;/*gtk widget pointers to the text fields in the connect window*/
 		GtkWidget *port;
 		GtkWidget *username;
+		GtkWidget *connect_button;/*the connect button in the main window*/
 		int sockfd;
-	}		gl_env;
+	}		gl_env;	
 #endif
 
 /* This is the header for the gtk project,

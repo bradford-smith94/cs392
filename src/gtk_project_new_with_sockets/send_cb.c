@@ -15,15 +15,18 @@ void send_cb(GtkWidget *w, gpointer data)
 	GtkTextBuffer *buf;
 
 	#ifdef DEBUG
-		my_str("Send called: ");
-		my_str(get_text_from_textview(GTK_WIDGET(data)));
-		my_str("<\n");
+		my_str("***DEBUG***Send called\n");
 	#endif
 	if(gl_env.sockfd)
 	{
 		send_msg(get_text_from_textview(GTK_WIDGET(data)));
 		read_reply();
 	}
+	else if(gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(gl_env.connect_button)))
+		client_exit();
+	#ifdef DEBUG
+		my_str("***DEBUG***Clearing textview\n");
+	#endif
 	buf = gtk_text_buffer_new(NULL);
 	gtk_text_view_set_buffer(data, buf);
 }

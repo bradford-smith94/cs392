@@ -40,6 +40,7 @@ void init_main_win()
 	g_signal_connect(G_OBJECT(b), "clicked", G_CALLBACK(connect_cb), NULL);
 	gtk_table_attach_defaults(GTK_TABLE(tab), b, 0, 2, 2, 3);
 	gtk_widget_show(b);
+	gl_env.connect_button = b;
 
 	b = gtk_button_new_with_label("Quit");
 	g_signal_connect(G_OBJECT(b), "clicked", G_CALLBACK(quit_cb), G_OBJECT(win));

@@ -22,7 +22,7 @@ gchar* get_text_from_textview(GtkWidget *t)
 	#ifdef DEBUG
 		my_str("Getting text from textview: '");
 		my_str(text);
-		my_char('\'');
+		my_str("'\n");
 	#endif
 	return text;
 }

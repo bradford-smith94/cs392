@@ -22,6 +22,7 @@ void print_msg(char *msg)
 				my_str(": ");
 				my_str(msg);
 				my_char('\n');
+				return;
 			}
 		}
 		send_reply("/nack");
