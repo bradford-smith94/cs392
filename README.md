@@ -11,3 +11,4 @@ Git Repository for CS 392 Systems Programming
 - mysockets: program that uses sockets for client/server communication
 - myselect: program that demonstrates different terminal capabilities
 - gtk: a GUI front-end for the client of mysockets
+- (Extra Credit) cheater checker: a shell script that checks files using diffs for possible cheating
