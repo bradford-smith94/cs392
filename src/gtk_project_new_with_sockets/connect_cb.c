@@ -13,12 +13,14 @@
 void connect_cb(GtkWidget *w, gpointer data)
 {	
 	static GtkWidget *win;
+	GtkWidget *tab;
+	GtkWidget *b;
+
 	if(gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(w)))
 	{
-		GtkWidget *tab;
-		GtkWidget *b;
-
 		win = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+		g_signal_connect(G_OBJECT(win), "delete-event", G_CALLBACK(connect_cancel_cb), NULL);
+		g_signal_connect(G_OBJECT(win), "destroy", G_CALLBACK(connect_cancel_cb), NULL);
 		g_signal_connect(G_OBJECT(win), "destroy", G_CALLBACK(gtk_widget_destroyed), &win);
 		/*the gtk_widget_destroyed callback will set win to NULL*/
 		gtk_window_set_title(GTK_WINDOW(win), "Connect to a Server");

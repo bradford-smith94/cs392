@@ -15,11 +15,11 @@
 void quit_cb(GtkWidget *w, gpointer pWin)
 {
 	static GtkWidget *win;
+	GtkWidget *tab;
+	GtkWidget *b;
+
 	if(win == NULL)
 	{
-		GtkWidget *tab;
-		GtkWidget *b;
-
 		win = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 		g_signal_connect(G_OBJECT(win), "destroy", G_CALLBACK(gtk_widget_destroyed), &win);
 		/*the gtk_widget_destroyed callback will set win to NULL*/

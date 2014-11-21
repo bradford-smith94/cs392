@@ -64,6 +64,7 @@ void my_err(char*);
 	void send_cb(GtkWidget*, gpointer);
 	void connect_cb(GtkWidget*, gpointer);
 	void connect_confirm_cb(GtkWidget*, gpointer);
+	void connect_cancel_cb(GtkWidget*, gpointer);
 	gchar* get_text_from_textview(GtkWidget *t);
 #endif
 

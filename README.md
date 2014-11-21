@@ -10,3 +10,4 @@ Git Repository for CS 392 Systems Programming
 - mysignals: program that uses signals for basic client/server communication
 - mysockets: program that uses sockets for client/server communication
 - myselect: program that demonstrates different terminal capabilities
+- gtk: a GUI front-end for the client of mysockets
