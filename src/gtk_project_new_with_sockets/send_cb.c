@@ -19,8 +19,11 @@ void send_cb(GtkWidget *w, gpointer data)
 		my_str(get_text_from_textview(GTK_WIDGET(data)));
 		my_str("<\n");
 	#endif
-	send_msg(get_text_from_textview(GTK_WIDGET(data)));
-	read_reply();
+	if(gl_env.sockfd)
+	{
+		send_msg(get_text_from_textview(GTK_WIDGET(data)));
+		read_reply();
+	}
 	buf = gtk_text_buffer_new(NULL);
 	gtk_text_view_set_buffer(data, buf);
 }
