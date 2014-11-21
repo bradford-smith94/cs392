@@ -57,12 +57,12 @@ void connect_cb(GtkWidget *w, gpointer data)
 
 		b = gtk_button_new_with_label("Ok");
 		g_signal_connect(G_OBJECT(b), "clicked", G_CALLBACK(connect_confirm_cb), G_OBJECT(win));
-		gtk_table_attach(GTK_TABLE(tab), b, 0, 1, 3, 4, (GTK_SHRINK | GTK_FILL), (GTK_SHRINK | GTK_FILL), 0, 0);
+		gtk_table_attach(GTK_TABLE(tab), b, 0, 1, 3, 4, GTK_SHRINK, (GTK_SHRINK | GTK_FILL), 0, 0);
 		gtk_widget_show(b);
 
 		b = gtk_button_new_with_label("Cancel");
 		g_signal_connect_swapped(G_OBJECT(b), "clicked", G_CALLBACK(gtk_widget_destroy), G_OBJECT(win));
-		gtk_table_attach(GTK_TABLE(tab), b, 1, 2, 3, 4, (GTK_SHRINK | GTK_FILL), (GTK_SHRINK | GTK_FILL), 0, 0);
+		gtk_table_attach(GTK_TABLE(tab), b, 1, 2, 3, 4, GTK_SHRINK, (GTK_SHRINK | GTK_FILL), 0, 0);
 		gtk_widget_show(b);
 
 		gtk_container_add(GTK_CONTAINER(win), tab);

@@ -35,12 +35,12 @@ void quit_cb(GtkWidget *w, gpointer pWin)
 		b = gtk_button_new_with_label("Yes");
 		g_signal_connect_swapped(G_OBJECT(b), "clicked", G_CALLBACK(gtk_widget_destroy), G_OBJECT(pWin));
 		g_signal_connect_swapped(G_OBJECT(b), "clicked", G_CALLBACK(gtk_widget_destroy), G_OBJECT(win));
-		gtk_table_attach(GTK_TABLE(tab), b, 0, 1, 1, 2, (GTK_SHRINK | GTK_FILL), (GTK_SHRINK | GTK_FILL), 0, 0);
+		gtk_table_attach(GTK_TABLE(tab), b, 0, 1, 1, 2, GTK_SHRINK, (GTK_SHRINK | GTK_FILL), 0, 0);
 		gtk_widget_show(b);
 
 		b = gtk_button_new_with_label("No");
 		g_signal_connect_swapped(G_OBJECT(b), "clicked", G_CALLBACK(gtk_widget_destroy), G_OBJECT(win));
-		gtk_table_attach(GTK_TABLE(tab), b, 1, 2, 1, 2, (GTK_SHRINK | GTK_FILL), (GTK_SHRINK | GTK_FILL), 0, 0);
+		gtk_table_attach(GTK_TABLE(tab), b, 1, 2, 1, 2, GTK_SHRINK, (GTK_SHRINK | GTK_FILL), 0, 0);
 		gtk_widget_show(b);
 
 		gtk_container_add(GTK_CONTAINER(win), tab);

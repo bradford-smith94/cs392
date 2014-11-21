@@ -35,18 +35,18 @@ void init_main_win()
 
 	b = gtk_button_new_with_label("Send");
 	g_signal_connect(G_OBJECT(b), "clicked", G_CALLBACK(send_cb), t);
-	gtk_table_attach(GTK_TABLE(tab), b, 3, 4, 0, 1, (GTK_SHRINK | GTK_FILL), (GTK_SHRINK | GTK_FILL), 0, 0);
+	gtk_table_attach(GTK_TABLE(tab), b, 3, 4, 0, 1, GTK_SHRINK, (GTK_SHRINK | GTK_FILL), 0, 0);
 	gtk_widget_show(b);
 
 	b = gtk_toggle_button_new_with_label("Connect");
 	g_signal_connect(G_OBJECT(b), "clicked", G_CALLBACK(connect_cb), NULL);
-	gtk_table_attach(GTK_TABLE(tab), b, 0, 2, 1, 2, (GTK_SHRINK | GTK_FILL), (GTK_SHRINK | GTK_FILL), 0, 0);
+	gtk_table_attach(GTK_TABLE(tab), b, 0, 2, 1, 2, GTK_SHRINK, (GTK_SHRINK | GTK_FILL), 0, 0);
 	gtk_widget_show(b);
 	gl_env.connect_button = b;
 
 	b = gtk_button_new_with_label("Quit");
 	g_signal_connect(G_OBJECT(b), "clicked", G_CALLBACK(quit_cb), G_OBJECT(win));
-	gtk_table_attach(GTK_TABLE(tab), b, 2, 4, 1, 2, (GTK_SHRINK | GTK_FILL), (GTK_SHRINK | GTK_FILL), 0, 0);
+	gtk_table_attach(GTK_TABLE(tab), b, 2, 4, 1, 2, GTK_SHRINK, (GTK_SHRINK | GTK_FILL), 0, 0);
 	gtk_widget_show(b);
 
 	gtk_container_add(GTK_CONTAINER(win), tab);
