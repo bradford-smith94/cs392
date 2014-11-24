@@ -5,4 +5,17 @@
 #11/22/2014
 #"I pledge my honor that I have abided by the Stevens Honor System."
 
+#pre: takes two parameters the first is a year and the second is the project name
+#		file structure ./year/user/project
+#post: the script checks all the students projects in the given year for cheating
+#		it also checks them against all the previous years projects of that name
 #!/bin/sh
+
+if test $# -lt 2; then
+	echo "usage: ./cheaterchecker <year> <projectName>"
+else
+	YEAR=$1
+	PROJECT=$2
+	echo ${YEAR}
+	echo ${PROJECT}
+fi
